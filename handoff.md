@@ -2,7 +2,7 @@
 
 Terakhir diperbarui: 25 Oktober 2026
 Produksi: https://cipher-ti25.vercel.app
-Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal, commit awal 25 Oktober 2026)
+Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`, tag `v1.0.0` di `fdacd45`; rilis `v1.1.0` di commit ini)
 
 ---
 
@@ -16,9 +16,10 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 | Tipografi | Geist diganti IBM Plex Sans + IBM Plex Mono; `overused-font` hilang |
 | `npm run lint` / `typecheck` / `build` | Bersih (25 Oktober 2026) |
 | Regresi admin (Playwright) | 10/10 lolos di produksi |
-| Deploy terakhir | `vercel --prod` → `dpl_3zDzsvPubeJKEjD7iEqkJxbCVJoU` |
-| Version control | Git lokal, commit awal `Initial commit: CIPHER TI 2025` |
-| Codebase Memory watcher | Aktif (project-level); index 436 nodes / 800 edges; tools tetap disabled |
+| Deploy terakhir | `vercel --prod` → `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9` |
+| Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda |
+| Version control | Git lokal `main`, tag `v1.0.0` & `v1.1.0`; perubahan terbaru sudah di-commit |
+| Codebase Memory watcher | Aktif (session-managed); index 433 nodes / 804 edges; reindex 25 Oktober 2026; tools tetap disabled |
 
 Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node`, dan `npm run ...` langsung.
 
@@ -52,7 +53,11 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 - **Dialog hapus:** reset state memakai listener `close` native pada `<dialog>` (bukan hanya `onClose` sintetis React); tombol Batal menutup dialog lalu `setOpen(false)`. Dialog bisa dibuka ulang setelah Escape, dan kontennya benar-benar dilepas.
 - **Regresi admin produksi:** login, tabel 67 baris, dialog (h2 tunggal, fokus awal Batal), form tambah, pencarian, edit+simpan, hapus — semua lolos. Data uji `2000000000001` dibersihkan via service role.
 - **Verifikasi visual:** font terpasang (`IBM Plex Sans`/`IBM Plex Mono`), 0 horizontal overflow pada 1440×900 dan 390×844 untuk beranda, profil, login, masuk.
-- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini bukan git repo). `opencode.json` level proyek meng-enable MCP hanya untuk watcher, sementara `tools` tetap `false`. `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge. Watcher hanya hidup selama sesi opencode berjalan; config dibaca saat startup.
+- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini sudah menjadi git repo lokal). `opencode.json` level proyek meng-enable MCP hanya untuk watcher, sementara `tools` tetap `false`. `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge; reindex manual berikutnya menghasilkan 433 node/804 edge. Daemon berjalan `session-managed`, watcher `tree` poll 5 detik; reindex manual 25 Oktober 2026 selesai `ready`. Watcher hanya hidup selama sesi opencode/daemon berjalan; config dibaca saat startup.
+- **Reindex manual:** 433 nodes / 804 edges, status `ready`; 1 file parse parsial (`supabase/schema.sql`), 0 unusable/skipped; 7 direktori/12 file tidak diindeks; doc links 17 (2 ambigu, 8 below tier).
+- **Homepage & logo:** kartu bawah diganti **Filosofi CIPHER** (4 poin) dan **Profil Akademik**; logo header diganti emblem dari `cipher25.jpe` (crop + background transparan → `public/cipher-mark.webp`, tampil 55×44); footer menjadi "Dikelola oleh RyuuZev" dengan tautan ke GitHub.
+- **Polish kartu beranda:** teks abu-abu di Filosofi/Profil → `text-zinc-300`; padding `p-8 sm:p-10`; border `border-white/10`; deskripsi hero `leading-7 sm:leading-8`. Diverifikasi di 1440×900 dan 390×844.
+- **Rilis:** `v1.0.0` (commit `fdacd45`) menandai state produksi sebelum polish; `v1.1.0` menandai polish kartu + deploy `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9`. `package.json`/`package-lock.json` diset ke 1.1.0.
 
 ---
 
@@ -72,6 +77,10 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 - `opencode.json` — enable MCP Codebase Memory khusus project ini untuk watcher; semua tool MCP tetap `false`.
 - `.cbmignore` — exclusion watcher/index untuk tooling, build, PII, dan env.
 - `.gitignore` — tambah exclusion `.agents/` dan `.opencode/` agar repo tidak membengkak ±70 MB.
+- `src/app/page.tsx`, `src/components/site-header.tsx`, `src/components/site-footer.tsx` — konten Filosofi/Profil Akademik, logo header, tautan footer.
+- `public/cipher-mark.webp` — emblem header transparan hasil crop dari `cipher25.jpe` (199×160, 27.398 byte).
+- `cipher25.jpe` — sumber logo asli 640×640; sudah di-commit di v1.0.0.
+- `package.json`, `package-lock.json` — versi rilis 1.1.0.
 
 ### Sesi sebelumnya (masih relevan)
 - `src/lib/access-core.ts`, `src/lib/access.ts`, `src/app/masuk/{page.tsx,access-form.tsx,actions.ts}` — gate.
@@ -101,8 +110,8 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 4. **Housekeeping rutin.**
    Folder temp `C:\Users\Axioo\AppData\Local\Temp\opencode\` sudah dibersihkan dari probe sesi ini (`gate-*`, `admin-check`, `audit-cdp`, `visual-check`, screenshot, `recover`, `audit-profile`). File lama milik proyek lain tidak disentuh.
 
-5. **Restart opencode untuk watcher.**
-   Config MCP dibaca saat startup. Setelah keluar dan membuka ulang opencode, verifikasi `D:\CBM-INDEX\logs\cbm-daemon.log` berisi `watcher.start` dan `watcher.watch project=...`. Watcher berjalan otomatis; jangan panggil tool MCP.
+5. **Watcher Codebase Memory sudah aktif.**
+   Daemon `active (session-managed)`, watcher `tree` poll 5 detik, index `433/804` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
 
 ---
 

@@ -47,7 +47,7 @@ export default async function Home({ searchParams }: HomePageProps) {
                 CIPHER
               </h1>
 
-              <p className="animate-rise mx-auto mt-5 max-w-[58ch] text-sm leading-relaxed text-muted sm:text-base">
+              <p className="animate-rise mx-auto mt-5 max-w-[58ch] text-sm leading-7 text-muted sm:text-base sm:leading-8">
                 Database profil mahasiswa Teknologi Informasi 2025. Cari
                 berdasarkan NIM atau nama, lalu buka halaman profil lengkap.
               </p>
@@ -188,12 +188,12 @@ const academicItems = [
 function Intro() {
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-      <section className="surface relative overflow-hidden rounded-3xl p-6 sm:p-8">
+      <section className="surface relative overflow-hidden rounded-3xl border border-white/10! p-8 sm:p-10">
         <div className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-neon/10 blur-2xl" />
         <h2 className="text-2xl font-semibold leading-snug text-fg sm:text-3xl">
           Filosofi CIPHER
         </h2>
-        <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-muted">
+        <p className="mt-3 max-w-[58ch] text-sm leading-7 text-zinc-300">
           Identitas dan nilai yang merepresentasikan mahasiswa TI angkatan 2025.
         </p>
 
@@ -212,7 +212,7 @@ function Intro() {
                 </span>
                 <span>{item.title}</span>
               </h3>
-              <p className="mt-1.5 max-w-[62ch] text-sm leading-relaxed text-muted">
+              <p className="mt-1.5 max-w-[62ch] text-sm leading-7 text-zinc-300">
                 {item.description}
               </p>
             </li>
@@ -220,19 +220,19 @@ function Intro() {
         </ol>
       </section>
 
-      <section className="surface relative overflow-hidden rounded-3xl p-6 sm:p-8">
+      <section className="surface relative overflow-hidden rounded-3xl border border-white/10! p-8 sm:p-10">
         <div className="pointer-events-none absolute -bottom-16 -left-16 size-44 rounded-full bg-neon/10 blur-2xl" />
         <h2 className="text-2xl font-semibold leading-snug text-fg">
           Profil Akademik
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted">
+        <p className="mt-3 text-sm leading-7 text-zinc-300">
           Identitas institusi yang menaungi mahasiswa CIPHER.
         </p>
 
         <dl className="mt-8 divide-y divide-line/80 border-t border-line/80">
           {academicItems.map((item) => (
             <div key={item.label} className="py-4">
-              <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+              <dt className="font-mono text-xs uppercase tracking-[0.16em] text-zinc-300">
                 {item.label}
               </dt>
               <dd className="mt-1.5 text-sm font-medium text-fg">
