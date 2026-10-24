@@ -1,0 +1,8 @@
+.agents/
+.opencode/
+.next/
+node_modules/
+.vercel/
+Foto/
+Informasi Angkatan TI 25 - DB.csv
+.env*

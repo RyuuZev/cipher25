@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T00:00:00.000Z",
+  "title": "Design System: CIPHER",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#04060c", "tonalRamp": ["#080b12", "#20242c", "#3c4048", "#595e67", "#7c808a", "#a0a5af", "#c5cbd5", "#e9effa"] },
+      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "#080d17", "tonalRamp": ["#060b15", "#1e242f", "#39404c", "#575e6b", "#79808e", "#9da5b3", "#c3cbda", "#e6efff"] },
+      "surface-raised": { "role": "neutral", "displayName": "Surface Raised", "canonical": "#0b1220", "tonalRamp": ["#050b18", "#1c2433", "#374050", "#555e70", "#778193", "#9ba5b9", "#c0cbdf", "#e4efff"] },
+      "line": { "role": "neutral", "displayName": "Line", "canonical": "#142235", "tonalRamp": ["#020b1c", "#162538", "#314156", "#4f5f75", "#708299", "#94a6bf", "#bacce6", "#def0ff"] },
+      "signal-cyan": { "role": "primary", "displayName": "Signal Cyan", "canonical": "#22d3ee", "tonalRamp": ["#000f14", "#002b34", "#004a56", "#006b7d", "#0091a7", "#00bad4", "#3ce1fc", "#9effff"] },
+      "signal-cyan-soft": { "role": "primary", "displayName": "Signal Cyan Soft", "canonical": "#67e8f9", "tonalRamp": ["#000f13", "#002b31", "#004a54", "#006b77", "#0093a3", "#2ab8c9", "#5ee0f1", "#a3ffff"] },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#8193ad", "tonalRamp": ["#020b1d", "#162439", "#314157", "#4e5f77", "#70819b", "#94a6c1", "#b9cce8", "#dff0ff"] },
+      "text-default": { "role": "neutral", "displayName": "Text Default", "canonical": "#f1f5f9", "tonalRamp": ["#090b0e", "#212427", "#3d4043", "#5b5e61", "#7d8184", "#a1a5a9", "#c7cbcf", "#ebeff3"] },
+      "text-bright": { "role": "neutral", "displayName": "Text Bright", "canonical": "#f8fafc", "tonalRamp": ["#0a0b0d", "#232426", "#3e4041", "#5c5e5f", "#7f8082", "#a3a5a7", "#c9cbcd", "#edeff1"] },
+      "text-soft": { "role": "neutral", "displayName": "Text Soft", "canonical": "#e2e8f0", "tonalRamp": ["#080b10", "#20242a", "#3b4046", "#595e65", "#7b8188", "#9fa5ad", "#c5cbd3", "#e9eff7"] },
+      "text-dim": { "role": "neutral", "displayName": "Text Dim", "canonical": "#cbd5e1", "tonalRamp": ["#060c13", "#1d252e", "#38414a", "#565f69", "#78818c", "#9ca6b1", "#c2ccd8", "#e5f0fc"] },
+      "danger": { "role": "tertiary", "displayName": "Danger", "canonical": "#f43f5e", "tonalRamp": ["#220002", "#4c0010", "#7d0021", "#b20034", "#e32c51", "#ff6c7c", "#ffafb3", "#ffe4e5"] },
+      "danger-soft": { "role": "tertiary", "displayName": "Danger Soft", "canonical": "#fb7185", "tonalRamp": ["#220003", "#4c0013", "#7d0027", "#a72041", "#d14b62", "#fb7185", "#ffafb7", "#ffe4e6"] },
+      "danger-text": { "role": "tertiary", "displayName": "Danger Text", "canonical": "#fecdd3", "tonalRamp": ["#1d0106", "#3a171e", "#593339", "#7a5056", "#9e7378", "#c5979c", "#ecbcc2", "#ffe4e8"] },
+      "danger-text-bright": { "role": "tertiary", "displayName": "Danger Text Bright", "canonical": "#ffe4e6", "tonalRamp": ["#160608", "#311e20", "#4e393b", "#6d5759", "#91797b", "#b69d9f", "#ddc3c5", "#ffe7e9"] },
+      "success": { "role": "secondary", "displayName": "Success", "canonical": "#34d399", "tonalRamp": ["#001106", "#002e1a", "#004e31", "#00724a", "#009968", "#0cc289", "#53e9ae", "#b4ffdd"] },
+      "success-soft": { "role": "secondary", "displayName": "Success Soft", "canonical": "#6ee7b7", "tonalRamp": ["#001106", "#002e1c", "#004e33", "#00724c", "#00986c", "#3fbe90", "#6ce5b5", "#b2ffdf"] },
+      "success-text": { "role": "secondary", "displayName": "Success Text", "canonical": "#a7f3d0", "tonalRamp": ["#001106", "#002e1b", "#004e33", "#1e6d50", "#469172", "#6cb796", "#92ddbb", "#b6ffdf"] },
+      "warning": { "role": "secondary", "displayName": "Warning", "canonical": "#fbbf24", "tonalRamp": ["#130900", "#332000", "#543b00", "#7a5700", "#a47800", "#d09b00", "#fcc026", "#ffebad"] },
+      "warning-text": { "role": "secondary", "displayName": "Warning Text", "canonical": "#fcd34d", "tonalRamp": ["#110a00", "#2f2200", "#503d00", "#745a00", "#9d7c00", "#c8a000", "#efc63d", "#ffed97"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hanya wordmark CIPHER di hero: mono, kapital, tracking 0.14em, 48/72/96px." },
+      "headline": { "displayName": "Headline", "purpose": "Judul seksi dan judul kartu besar; maksimal dua baris." },
+      "title": { "displayName": "Title", "purpose": "Judul dialog, judul seksi form, nama pada keadaan kosong." },
+      "body": { "displayName": "Body", "purpose": "Paragraf penjelas, isi form, deskripsi fitur." },
+      "body-small": { "displayName": "Body Small", "purpose": "Keterangan bantuan dan catatan privasi. 12px adalah lantai." },
+      "eyebrow": { "displayName": "Eyebrow", "purpose": "Label field form dan metadata kartu; bukan kicker di atas headline." },
+      "mono-data": { "displayName": "Mono Data", "purpose": "Fakta bernomor: NIM, jumlah hasil, statistik, wordmark header." }
+    },
+    "shadows": [
+      { "name": "hover-lift", "value": "0 18px 50px -24px rgba(34,211,238,0.45)", "purpose": "Hanya pada kartu yang bisa diklik, hanya saat hover." },
+      { "name": "dialog", "value": "0 25px 50px -12px rgba(0,0,0,0.6)", "purpose": "Hanya untuk dialog modal." }
+    ],
+    "motion": [
+      { "name": "ease-out-quiet", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Easing untuk animasi masuk (rise)." },
+      { "name": "hover-fast", "value": "180ms ease", "purpose": "Transisi tombol dan warna border." },
+      { "name": "surface-lift", "value": "200ms ease", "purpose": "Border, transform, dan bayangan pada kartu hover." },
+      { "name": "rise-in", "value": "600ms cubic-bezier(0.22, 1, 0.36, 1) both", "purpose": "Elemen hero masuk dari 14px di bawah." },
+      { "name": "breathe", "value": "1.8s ease-in-out infinite", "purpose": "Pengganti pulse/spin saat pengguna meminta reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Satu-satunya aksi utama per layar: cari, masuk, simpan.",
+      "html": "<button class=\"ds-btn-primary\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"></circle><path d=\"m20 20-3.5-3.5\"></path></svg>Cari profil</button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:2.75rem; border:0; border-radius:.75rem; background:#22d3ee; color:var(--color-ink, #04060c); font:600 .875rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; padding:.7rem 1.15rem; cursor:pointer; transition:filter 180ms ease, transform 180ms ease; } .ds-btn-primary:hover { filter:brightness(1.08); transform:translateY(-1px); } .ds-btn-primary:focus-visible { outline:2px solid var(--color-neon-soft, #67e8f9); outline-offset:3px; } .ds-btn-primary:disabled { opacity:.6; cursor:not-allowed; } .ds-ico { width:1rem; height:1rem; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Aksi sekunder: Admin, Batal, Kembali.",
+      "html": "<button class=\"ds-btn-ghost\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><rect x=\"4\" y=\"10\" width=\"16\" height=\"10\" rx=\"2\"></rect><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"></path></svg>Admin</button>",
+      "css": ".ds-btn-ghost { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:2.75rem; border-radius:.75rem; border:1px solid rgba(34,211,238,.22); background:rgba(8,13,23,.7); color:#cffafe; font:400 .8125rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; padding:.65rem 1rem; cursor:pointer; transition:border-color 180ms ease, background 180ms ease; } .ds-btn-ghost:hover { border-color:rgba(34,211,238,.5); background:rgba(34,211,238,.08); } .ds-btn-ghost:focus-visible { outline:2px solid var(--color-neon-soft, #67e8f9); outline-offset:3px; } .ds-ico { width:.875rem; height:.875rem; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Pintu masuk tunggal ke data: satu field, satu tombol.",
+      "html": "<div class=\"ds-search\"><svg class=\"ds-ico\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"></circle><path d=\"m20 20-3.5-3.5\"></path></svg><input class=\"ds-search-input\" placeholder=\"Masukkan NIM atau nama mahasiswa...\" aria-label=\"Cari NIM atau nama\"><button class=\"ds-search-btn\">Cari profil</button></div>",
+      "css": ".ds-search { display:flex; align-items:center; gap:.75rem; padding:.5rem; border-radius:1rem; border:1px solid rgba(34,211,238,.13); background:linear-gradient(180deg, rgba(11,18,32,.86), rgba(7,11,20,.92)); backdrop-filter:blur(14px); } .ds-search:focus-within { border-color:rgba(34,211,238,.4); } .ds-search .ds-ico { width:1.25rem; height:1.25rem; color:rgba(34,211,238,.7); margin-left:.75rem; } .ds-search-input { flex:1; min-height:2.75rem; border:0; background:transparent; color:var(--color-text-default, #f1f5f9); font:400 .875rem/1.5 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; padding:.75rem 0; outline:none; } .ds-search-input::placeholder { color:var(--color-muted, #8193ad); } .ds-search-btn { min-height:2.75rem; border:0; border-radius:.75rem; background:#22d3ee; color:var(--color-ink, #04060c); font:600 .875rem/1 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; padding:0 1.15rem; cursor:pointer; } .ds-search-btn:hover { filter:brightness(1.08); }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Label identitas angkatan dan prodi; bukan filter.",
+      "html": "<span class=\"ds-chip\">Teknologi Informasi · Angkatan 2025</span>",
+      "css": ".ds-chip { display:inline-flex; align-items:center; gap:.4rem; border-radius:999px; border:1px solid rgba(34,211,238,.22); background:rgba(34,211,238,.07); padding:.25rem .7rem; font:400 .75rem/1.6 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; letter-spacing:.08em; text-transform:uppercase; color:#9eeefb; }"
+    },
+    {
+      "name": "Result Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Satu mahasiswa per kartu; seluruh kartu adalah satu tautan.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-avatar\">AR</span><span class=\"ds-card-body\"><span class=\"ds-card-name\">Abdurrazak</span><span class=\"ds-card-nim\">2510817110017</span><span class=\"ds-card-meta\">Teknologi Informasi · 2025</span></span><svg class=\"ds-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M7 17 17 7M9 7h8v8\"></path></svg></a>",
+      "css": ".ds-card { display:flex; align-items:center; gap:1rem; padding:.75rem; border-radius:1rem; border:1px solid rgba(34,211,238,.13); background:linear-gradient(180deg, rgba(11,18,32,.86), rgba(7,11,20,.92)); backdrop-filter:blur(14px); text-decoration:none; transition:border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease; } .ds-card:hover { border-color:rgba(34,211,238,.4); transform:translateY(-3px); box-shadow:0 18px 50px -24px rgba(34,211,238,.45); } .ds-card:focus-visible { outline:2px solid var(--color-neon-soft, #67e8f9); outline-offset:3px; } .ds-avatar { display:grid; place-items:center; width:4rem; height:4rem; flex:0 0 auto; border-radius:.75rem; background:rgba(34,211,238,.1); color:#9eeefb; font:500 .875rem IBM Plex Mono, ui-monospace, monospace; } .ds-card-body { display:flex; flex-direction:column; min-width:0; flex:1; } .ds-card-name { font:600 .875rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; color:var(--color-text-default, #f1f5f9); } .ds-card:hover .ds-card-name { color:var(--color-neon-soft, #67e8f9); } .ds-card-nim { margin-top:.25rem; font:500 .75rem/1.5 IBM Plex Mono, ui-monospace, monospace; letter-spacing:.05em; color:var(--color-muted, #8193ad); } .ds-card-meta { margin-top:.5rem; font:400 .75rem/1.5 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--color-muted, #8193ad); } .ds-arrow { width:1rem; height:1rem; color:var(--color-muted, #8193ad); } .ds-card:hover .ds-arrow { color:var(--color-neon, #22d3ee); }"
+    },
+    {
+      "name": "Site Header",
+      "kind": "nav",
+      "description": "Wordmark mono + satu tautan sekunder; sticky dengan blur.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#\"><span class=\"ds-mark\">C</span><span class=\"ds-brand-text\"><span class=\"ds-wordmark\">CIPHER</span><span class=\"ds-sub\">TI 2025</span></span></a><nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Cari</a><a class=\"ds-nav-ghost\" href=\"#\">Admin</a></nav></header>",
+      "css": ".ds-header { display:flex; align-items:center; justify-content:space-between; height:4rem; padding:0 1.5rem; border-bottom:1px solid rgba(20,34,53,.7); background:rgba(4,6,12,.75); backdrop-filter:blur(20px); } .ds-brand { display:flex; align-items:center; gap:.75rem; min-height:2.75rem; text-decoration:none; } .ds-mark { display:grid; place-items:center; width:2.25rem; height:2.25rem; border-radius:.75rem; border:1px solid rgba(34,211,238,.3); background:rgba(34,211,238,.1); color:var(--color-neon-soft, #67e8f9); font:500 .875rem IBM Plex Mono, ui-monospace, monospace; box-shadow:0 0 24px -8px rgba(34,211,238,.6); } .ds-brand-text { display:flex; flex-direction:column; line-height:1; } .ds-wordmark { font:600 .875rem/1 IBM Plex Mono, ui-monospace, monospace; letter-spacing:.32em; color:var(--color-text-default, #f1f5f9); } .ds-sub { margin-top:.25rem; font:400 .75rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; letter-spacing:.22em; text-transform:uppercase; color:var(--color-muted, #8193ad); } .ds-nav { display:flex; align-items:center; gap:.5rem; } .ds-nav-link { display:flex; align-items:center; min-height:2.75rem; padding:0 .75rem; border-radius:.5rem; font:400 .875rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; color:var(--color-text-dim, #cbd5e1); text-decoration:none; } .ds-nav-link:hover { color:var(--color-neon-soft, #67e8f9); } .ds-nav-ghost { display:inline-flex; align-items:center; min-height:2.75rem; padding:0 1rem; border-radius:.75rem; border:1px solid rgba(34,211,238,.22); background:rgba(8,13,23,.7); color:#cffafe; font:400 .75rem/1.4 IBM Plex Sans, ui-sans-serif, system-ui, sans-serif; text-decoration:none; } .ds-nav-ghost:hover { border-color:rgba(34,211,238,.5); }"
+    },
+    {
+      "name": "Photo Plate",
+      "kind": "custom",
+      "description": "Kartu foto profil: foto 4:5 dengan caption mono di dalam gradient.",
+      "html": "<div class=\"ds-plate\"><div class=\"ds-plate-photo\"></div><div class=\"ds-plate-caption\"><span class=\"ds-plate-kicker\">CIPHER · TI 2025</span><span class=\"ds-plate-nim\">2510817110017</span></div></div>",
+      "css": ".ds-plate { position:relative; overflow:hidden; border-radius:1.5rem; border:1px solid rgba(34,211,238,.13); background:linear-gradient(180deg, rgba(11,18,32,.86), rgba(7,11,20,.92)); padding:.75rem; max-width:24rem; } .ds-plate-photo { aspect-ratio:4/5; border-radius:1rem; background:radial-gradient(circle at 50% 30%, rgba(34,211,238,.18), rgba(4,6,12,.9)); } .ds-plate-caption { position:absolute; left:.75rem; right:.75rem; bottom:.75rem; display:flex; flex-direction:column; gap:.25rem; padding:1rem; border-radius:1rem; background:linear-gradient(to top, rgba(4,6,12,.9), rgba(4,6,12,.4), transparent); } .ds-plate-kicker { font:400 .75rem/1.5 IBM Plex Mono, ui-monospace, monospace; letter-spacing:.24em; text-transform:uppercase; color:rgba(34,211,238,.8); } .ds-plate-nim { font:400 .75rem/1.5 IBM Plex Mono, ui-monospace, monospace; letter-spacing:.16em; color:var(--color-text-soft, #e2e8f0); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Cipher Terminal",
+    "overview": "CIPHER terasa seperti konsol arsip angkatan yang dibuka dengan kunci: gelap, sunyi, dan presisi. Tidak ada elemen yang berteriak minta diperhatikan. Cahaya hanya muncul sebagai sinyal — satu aksen cyan yang menandai \"ini yang bisa kamu tekan\" atau \"ini yang baru berubah\" — sementara sisanya adalah lapisan biru-navy yang hampir hitam, dipisahkan garis rambut.\n\nKepadatan mengikuti produknya: pengunjung datang untuk satu orang, jadi layar pun disusun untuk satu tujuan. Monospace dipakai untuk fakta yang harus dibaca tepat (NIM, TTL, jumlah hasil), sans untuk kalimat. Dekorasi dibatasi pada tiga hal yang memang bermakna: grid halus di latar hero, satu cahaya lembut di belakang wordmark, dan sudut membulat yang konsisten. Wordmark tidak memakai gradient maupun glow teks — bobot dan ukurannya yang membuatnya berbicara.\n\nNada yang sengaja dihindari: landing page startup AI (glow tebal, gradient ungu-biru, kartu-kartu melayang tanpa alasan). Kalau sebuah efek tidak membantu menemukan atau membaca data, efek itu tidak dipakai.",
+    "keyCharacteristics": [
+      "Satu aksen cyan, dipakai hemat sebagai sinyal.",
+      "Latar berlapis tonal, bukan bayangan.",
+      "Garis rambut 1px transparan menggantikan divider solid.",
+      "Monospace untuk angka dan nomor, sans untuk bahasa.",
+      "Gerak pendek (180–600ms) dan selalu punya sebab."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Hanya satu warna aksen. Cyan menempati kurang dari 10% luas layar mana pun; kelangkaannya yang membuatnya terbaca sebagai sinyal, bukan sebagai tema.", "section": "colors" },
+      { "name": "The No Second Accent Rule", "body": "Jangan menambah ungu, hijau, atau oranye untuk \"variasi\". Warna di luar cyan hanya boleh muncul sebagai status (danger/success/warning) dan harus punya arti yang bisa disebutkan dalam satu kalimat.", "section": "colors" },
+      { "name": "The Mono-for-Facts Rule", "body": "Angka yang harus dibaca tepat — NIM, tanggal, jumlah hasil, statistik — selalu mono dengan tracking lebar. Kalimat yang harus dibaca lancar selalu sans. Jangan menukar keduanya.", "section": "typography" },
+      { "name": "The Twelve Pixel Floor Rule", "body": "Tidak ada teks di bawah 12px, termasuk label uppercase dan metadata.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "Permukaan datar saat diam. Bayangan hanya lahir dari keadaan: hover, fokus, atau modal. Jangan memberi semua kartu bayangan agar terlihat \"modern\".", "section": "elevation" },
+      { "name": "The No Halo Rule", "body": "Tidak ada cahaya nol-offset di sekitar teks, ikon, atau kotak kecil. Cahaya hanya boleh muncul sebagai blob kabur berskala besar di belakang hero.", "section": "elevation" },
+      { "name": "The Weight-Not-Paint Rule", "body": "Penekanan tipografis dicapai lewat bobot, ukuran, dan jarak huruf. Tidak ada gradient text, tidak ada glow teks, tidak ada warna-warni per kata.", "section": "typography" }
+    ],
+    "dos": [
+      "Do pakai satu aksen cyan dan biarkan ia jarang — di bawah 10% luas layar.",
+      "Do bangun kedalaman dari gradient gelap + border 1px, bukan dari bayangan.",
+      "Do pakai mono tracking lebar untuk NIM, tanggal, jumlah hasil, dan statistik.",
+      "Do jaga target sentuh minimal 44px, termasuk tautan teks dan tombol ikon.",
+      "Do tampilkan data kosong sebagai \"Belum diisi\" — jangan mengarang isi.",
+      "Do pertahankan kontras teks minimal 4.5:1; Muted hanya untuk teks yang boleh dilewati."
+    ],
+    "donts": [
+      "Don't menambah warna aksen kedua (ungu, oranye, hijau) untuk variasi visual.",
+      "Don't memakai gradient text sama sekali; penekanan datang dari bobot, ukuran, dan jarak huruf.",
+      "Don't memberi bayangan permanen pada kartu diam.",
+      "Don't memakai teks di bawah 12px, termasuk label uppercase.",
+      "Don't menaruh kicker dekoratif kecil di atas headline; eyebrow hanya untuk label field dan metadata.",
+      "Don't menyarangkan kartu di dalam kartu; satu permukaan per blok, pisahkan dengan garis rambut."
+    ]
+  }
+}
