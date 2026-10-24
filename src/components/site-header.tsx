@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LockKeyhole } from "lucide-react";
 
 export function SiteHeader() {
@@ -9,9 +10,15 @@ export function SiteHeader() {
       </a>
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" prefetch={false} className="group flex min-h-11 items-center gap-3">
-          <span className="grid size-9 place-items-center rounded-xl border border-neon/30 bg-neon/10 font-mono text-sm text-neon-soft transition-colors group-hover:border-neon/60 group-hover:bg-neon/15">
-            C
-          </span>
+          <Image
+            src="/cipher-mark.webp"
+            alt=""
+            width={199}
+            height={160}
+            priority
+            sizes="56px"
+            className="h-11 w-auto shrink-0 object-contain"
+          />
           <span className="flex flex-col leading-none">
             <span className="font-mono text-sm font-semibold tracking-[0.32em] text-fg transition-colors group-hover:text-neon-soft">
               CIPHER

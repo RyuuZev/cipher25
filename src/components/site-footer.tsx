@@ -6,7 +6,18 @@ export function SiteFooter() {
           <span className="font-mono tracking-[0.2em] text-fg-subtle">CIPHER</span>{" "}
           — Teknologi Informasi 2025
         </p>
-        <p>Dikelola pengurus angkatan</p>
+        <p>
+          Dikelola oleh{" "}
+          <a
+            href="https://github.com/RyuuZev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-sm font-medium text-fg-subtle underline-offset-4 transition-colors hover:text-neon-soft hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon/60"
+            aria-label="RyuuZev di GitHub (membuka tab baru)"
+          >
+            RyuuZev
+          </a>
+        </p>
       </div>
     </footer>
   );

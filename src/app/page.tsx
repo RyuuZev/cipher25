@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Fingerprint, GraduationCap, ShieldCheck, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { SearchForm } from "@/components/search-form";
@@ -151,78 +151,97 @@ function ResultsSkeleton() {
   );
 }
 
+const philosophyItems = [
+  {
+    number: "01",
+    title: "Makna Dasar",
+    description:
+      "Cipher berarti kode atau pesan tersembunyi, melambangkan setiap mahasiswa sebagai bagian penting dari sistem yang lebih besar.",
+  },
+  {
+    number: "02",
+    title: "Inovasi & Kreativitas",
+    description:
+      "Coding Innovation mencerminkan semangat menciptakan solusi digital melalui pola pikir algoritmis dan kreativitas.",
+  },
+  {
+    number: "03",
+    title: "Progress & Harmony",
+    description:
+      "Berkembang bersama dalam keberagaman, saling terhubung untuk mencapai tujuan yang sama.",
+  },
+  {
+    number: "04",
+    title: "Revolution",
+    description:
+      "Tekad untuk menciptakan perubahan dan terobosan baru di dunia teknologi.",
+  },
+] as const;
+
+const academicItems = [
+  { label: "Universitas", value: "Universitas Lambung Mangkurat" },
+  { label: "Fakultas", value: "Fakultas Teknik" },
+  { label: "Program Studi", value: "Teknologi Informasi" },
+  { label: "Angkatan", value: "2025" },
+] as const;
+
 function Intro() {
   return (
-    <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
-      <div className="surface relative overflow-hidden rounded-3xl p-6 sm:p-8">
+    <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="surface relative overflow-hidden rounded-3xl p-6 sm:p-8">
         <div className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-neon/10 blur-2xl" />
-        <h2 className="max-w-md text-2xl font-semibold leading-snug text-fg sm:text-3xl">
-          Satu pencarian, satu profil, tanpa perlu daftar akun.
+        <h2 className="text-2xl font-semibold leading-snug text-fg sm:text-3xl">
+          Filosofi CIPHER
         </h2>
-        <p className="mt-3 max-w-[62ch] text-sm leading-relaxed text-muted">
-          Halaman ini khusus untuk mahasiswa TI 2025. Data hanya bisa dibuka
-          lewat pencarian NIM atau nama, dan panel admin dijaga dengan login.
+        <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-muted">
+          Identitas dan nilai yang merepresentasikan mahasiswa TI angkatan 2025.
         </p>
 
-        <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-line/80 pt-4">
-          <Stat value="13" label="Digit NIM" />
-          <Stat value="2025" label="Angkatan" />
-          <Stat value="TI" label="Program studi" />
+        <ol className="mt-8">
+          {philosophyItems.map((item) => (
+            <li
+              key={item.number}
+              className="border-t border-line/80 py-5 first:border-t-0 first:pt-0 last:pb-0"
+            >
+              <h3 className="flex flex-wrap items-baseline gap-x-2 text-sm font-semibold text-fg">
+                <span className="font-mono text-xs font-normal tracking-[0.16em] text-neon-soft">
+                  {item.number}
+                </span>
+                <span aria-hidden="true" className="text-muted/60">
+                  —
+                </span>
+                <span>{item.title}</span>
+              </h3>
+              <p className="mt-1.5 max-w-[62ch] text-sm leading-relaxed text-muted">
+                {item.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="surface relative overflow-hidden rounded-3xl p-6 sm:p-8">
+        <div className="pointer-events-none absolute -bottom-16 -left-16 size-44 rounded-full bg-neon/10 blur-2xl" />
+        <h2 className="text-2xl font-semibold leading-snug text-fg">
+          Profil Akademik
+        </h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          Identitas institusi yang menaungi mahasiswa CIPHER.
+        </p>
+
+        <dl className="mt-8 divide-y divide-line/80 border-t border-line/80">
+          {academicItems.map((item) => (
+            <div key={item.label} className="py-4">
+              <dt className="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+                {item.label}
+              </dt>
+              <dd className="mt-1.5 text-sm font-medium text-fg">
+                {item.value}
+              </dd>
+            </div>
+          ))}
         </dl>
-      </div>
-
-      <div className="grid gap-3">
-        <Feature
-          icon={<Fingerprint className="size-4" />}
-          title="Pencarian terarah"
-          description="Cari pakai NIM atau nama. Hasil dibatasi agar tetap ringkas."
-        />
-        <Feature
-          icon={<GraduationCap className="size-4" />}
-          title="Profil lengkap"
-          description="Foto, NIM, TTL, prodi, fakultas, angkatan, dan Instagram."
-        />
-        <Feature
-          icon={<ShieldCheck className="size-4" />}
-          title="Admin terkendali"
-          description="Hanya pengurus yang bisa menambah, mengubah, dan menghapus data."
-        />
-      </div>
-    </div>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <dt className="text-xs uppercase tracking-[0.16em] text-muted">
-        {label}
-      </dt>
-      <dd className="mt-1 font-mono text-xl font-semibold text-neon-soft">
-        {value}
-      </dd>
-    </div>
-  );
-}
-
-function Feature({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="surface flex items-start gap-3 rounded-2xl p-4">
-      <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg border border-neon/20 bg-neon/10 text-neon-soft">
-        {icon}
-      </span>
-      <div>
-        <p className="text-sm font-medium text-fg">{title}</p>
-        <p className="mt-1 text-xs leading-relaxed text-muted">{description}</p>
-      </div>
+      </section>
     </div>
   );
 }
