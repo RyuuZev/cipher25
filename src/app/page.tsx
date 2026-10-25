@@ -48,8 +48,9 @@ export default async function Home({ searchParams }: HomePageProps) {
               </h1>
 
               <p className="animate-rise mx-auto mt-5 max-w-[58ch] text-sm leading-7 text-muted sm:text-base sm:leading-8">
-                Database profil mahasiswa Teknologi Informasi 2025. Cari
-                berdasarkan NIM atau nama, lalu buka halaman profil lengkap.
+                Database profil mahasiswa Teknologi Informasi 2025.
+                <br />
+                Cari berdasarkan NIM atau nama.
               </p>
 
               <div className="animate-rise mt-10 scroll-mt-24" id="cari">

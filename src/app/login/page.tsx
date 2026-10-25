@@ -55,10 +55,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                   CIPHER / TI 2025
                 </span>
               </p>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-                Login hanya untuk admin angkatan. Dari sini kamu bisa menambah,
-                mengubah, dan menghapus data mahasiswa.
-              </p>
             </div>
 
             <div className="border-t border-line/70 pt-4 font-mono text-xs leading-relaxed text-muted">
@@ -85,18 +81,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <h1 className="mt-6 text-xl font-semibold text-fg">
               Masuk sebagai admin
             </h1>
-            <p className="mt-1 text-xs text-muted">
-              Gunakan akun yang sudah terdaftar di Supabase Auth.
-            </p>
 
             <div className="mt-6">
               <LoginForm next={next} />
             </div>
-
-            <p className="mt-6 text-xs leading-relaxed text-muted">
-              Tidak ada pendaftaran publik. Akun admin dibuat oleh pengurus
-              melalui dashboard Supabase.
-            </p>
           </div>
         </div>
       </main>

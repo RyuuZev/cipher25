@@ -1,6 +1,7 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
 Terakhir diperbarui: 25 Oktober 2026
+Status: **PAUSED di v1.1.1** — pemangkasan copy selesai; menunggu rencana berikutnya dari pengguna.
 Produksi: https://cipher-ti25.vercel.app
 Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`, tag `v1.0.0` di `fdacd45`; rilis `v1.1.0` di commit ini)
 
@@ -10,16 +11,18 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 
 | Area | Status |
 |---|---|
+| Status proyek | **Berhenti di v1.1.1**; menunggu rencana berikutnya |
 | Fitur inti (pencarian, profil, admin CRUD) | Selesai, live di produksi |
 | Gerbang kode angkatan (`/masuk`) | Selesai; kode + secret sudah dirotasi di Vercel |
-| Audit UI/UX (`impeccable`) | Detector 0 temuan di 7 halaman × 2 viewport |
+| Audit UI/UX (`impeccable`) | Detector 0 temuan di 7 halaman × 2 viewport; **bukan bukti bebas isu** — audit manual menemukan P1/P2 (lihat §2a) |
+| Audit UI/UX manual (produksi) | Selesai 25 Oktober 2026; temuan terdokumentasi, **belum diperbaiki** |
 | Tipografi | Geist diganti IBM Plex Sans + IBM Plex Mono; `overused-font` hilang |
 | `npm run lint` / `typecheck` / `build` | Bersih (25 Oktober 2026) |
 | Regresi admin (Playwright) | 10/10 lolos di produksi |
-| Deploy terakhir | `vercel --prod` → `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9` |
-| Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda |
-| Version control | Git lokal `main`, tag `v1.0.0` & `v1.1.0`; perubahan terbaru sudah di-commit |
-| Codebase Memory watcher | Aktif (session-managed); index 433 nodes / 804 edges; reindex 25 Oktober 2026; tools tetap disabled |
+| Deploy terakhir | `vercel --prod` → `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9` (tidak ada deploy baru setelah audit) |
+| Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda; `v1.1.1` = pemangkasan copy beranda + login (commit, tag belum dibuat) |
+| Version control | `main` di `307880a` (`v1.1.0`); commit `v1.1.1` berisi `src/app/page.tsx`, `src/app/login/page.tsx`, `package.json`, `package-lock.json`, `handoff.md`; `opencode.json` tetap modified dan tidak di-commit |
+| Codebase Memory watcher | Aktif (`git`, poll 5 dtk); index **433 nodes / 806 edges**, reindex 25 Oktober 2026 06:12 UTC, status `ready`; tools MCP tetap tidak dipakai |
 
 Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node`, dan `npm run ...` langsung.
 
@@ -53,17 +56,58 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 - **Dialog hapus:** reset state memakai listener `close` native pada `<dialog>` (bukan hanya `onClose` sintetis React); tombol Batal menutup dialog lalu `setOpen(false)`. Dialog bisa dibuka ulang setelah Escape, dan kontennya benar-benar dilepas.
 - **Regresi admin produksi:** login, tabel 67 baris, dialog (h2 tunggal, fokus awal Batal), form tambah, pencarian, edit+simpan, hapus — semua lolos. Data uji `2000000000001` dibersihkan via service role.
 - **Verifikasi visual:** font terpasang (`IBM Plex Sans`/`IBM Plex Mono`), 0 horizontal overflow pada 1440×900 dan 390×844 untuk beranda, profil, login, masuk.
-- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini sudah menjadi git repo lokal). `opencode.json` level proyek meng-enable MCP hanya untuk watcher, sementara `tools` tetap `false`. `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge; reindex manual berikutnya menghasilkan 433 node/804 edge. Daemon berjalan `session-managed`, watcher `tree` poll 5 detik; reindex manual 25 Oktober 2026 selesai `ready`. Watcher hanya hidup selama sesi opencode/daemon berjalan; config dibaca saat startup.
-- **Reindex manual:** 433 nodes / 804 edges, status `ready`; 1 file parse parsial (`supabase/schema.sql`), 0 unusable/skipped; 7 direktori/12 file tidak diindeks; doc links 17 (2 ambigu, 8 below tier).
+- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini sudah menjadi git repo lokal). `opencode.json` level proyek meng-enable MCP hanya untuk watcher; `tools` seharusnya `false` (working tree saat ini `true`, lihat §3). `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge; reindex manual terakhir menghasilkan **433 node/806 edge**. Daemon berjalan `session-managed`, watcher `git` poll 5 detik; reindex manual 25 Oktober 2026 06:12 UTC selesai `ready`. Watcher hanya hidup selama sesi opencode/daemon berjalan; config dibaca saat startup.
+- **Reindex manual:** 433 nodes / 806 edges, status `ready`; 1 file parse parsial (`supabase/schema.sql`), 0 unusable/skipped; 7 direktori/12 file tidak diindeks; doc links 18 (2 ambigu, 8 below tier).
 - **Homepage & logo:** kartu bawah diganti **Filosofi CIPHER** (4 poin) dan **Profil Akademik**; logo header diganti emblem dari `cipher25.jpe` (crop + background transparan → `public/cipher-mark.webp`, tampil 55×44); footer menjadi "Dikelola oleh RyuuZev" dengan tautan ke GitHub.
 - **Polish kartu beranda:** teks abu-abu di Filosofi/Profil → `text-zinc-300`; padding `p-8 sm:p-10`; border `border-white/10`; deskripsi hero `leading-7 sm:leading-8`. Diverifikasi di 1440×900 dan 390×844.
 - **Rilis:** `v1.0.0` (commit `fdacd45`) menandai state produksi sebelum polish; `v1.1.0` menandai polish kartu + deploy `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9`. `package.json`/`package-lock.json` diset ke 1.1.0.
 
 ---
 
+## 2a. Audit UI/UX manual — 25 Oktober 2026 (temuan, belum diperbaiki)
+
+Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik + admin setelah login. Tidak ada kode aplikasi yang diubah; produksi tetap v1.1.0.
+
+**P1 — prioritas**
+1. **Overflow query panjang.** `/?q=` 300 karakter menghasilkan `scrollWidth` ±3.301px pada viewport 390px dan ±3.448px pada desktop. `<h2>` menampilkan query mentah tanpa pemenggalan (`src/app/page.tsx:109`); input belum dibatasi `maxLength`.
+2. **Nama aksesibel hilang.** Link eksternal "Lihat situs" di header admin mobile hanya ikon; teks `hidden sm:inline`, AX tree tidak punya nama (`src/app/admin/layout.tsx:62-65`).
+3. **Batas privasi.** Gate hanya UI. Anon key dapat memanggil `search_students`/`get_student` dan bucket foto publik; verifikasi grant `EXECUTE` di `supabase/schema.sql:126` dan akses publik `:171`. Ini risiko data pribadi, bukan sekadar UI.
+
+**P2 — UX**
+4. **404 salah konteks.** `/halaman-tidak-ada` menampilkan copy "Profil tidak ditemukan / NIM yang kamu masukkan…" dan title beranda (`src/app/not-found.tsx:19`).
+5. **Profil mobile.** Foto ID card ±415px mendominasi layar; nama baru muncul di `y≈658` dari viewport 844px.
+6. **Target sentuh.** `RyuuZev` ±47,7×15px (`src/components/site-footer.tsx:16`); clear search ±37,9×44px, mengecil ke ±30,6×44px di 320px (`src/components/search-form.tsx:35`).
+7. **Copy internal.** Pesan error menyebut "skema database", ".env.local", "konfigurasi Supabase" (`src/app/page.tsx:66,98`).
+8. **Hierarki login.** "Panel pengurus" 30px lebih menonjol daripada "Masuk sebagai admin" 20px; kartu kiri banyak ruang kosong (`src/app/login/page.tsx:52-80`).
+9. **Admin mobile.** Tabel ±976px di area ±356px; aksi di luar layar; container scroll tidak fokusable/labeled; tabel tanpa caption/`scope` (`src/app/admin/page.tsx:144-154`).
+10. **Loop `/masuk`.** Logo dan "Cari" menuju `/` yang redirect balik ke `/masuk`; tidak ada bantuan recovery kode.
+
+**P3 — aksesibilitas kecil**
+11. Hint search belum `aria-describedby`; nama link kartu mengulang "Foto … Nama … NIM …".
+12. `prefers-reduced-motion` masih memakai animasi `breathe` 1,8 dtk untuk pulse/spin (`src/app/globals.css:265`).
+
+**Yang sudah baik:** tanpa overflow di halaman normal 320–1440; kontras muted ±6,2:1; skip-link bekerja; focus ring dan dialog hapus baik; CLS 0; LCP warm 0,8–1,4 dtk; TTFB warm 70–130ms (cold sempat 1,2–4,6 dtk). Screenshot dan profil Chrome sementara sudah dibersihkan.
+
+**Catatan:** detector `impeccable` 0 temuan tidak menangkap isu di atas (overflow query, accessible name, konteks copy, hierarki mobile).
+
+---
+
 ## 3. File yang dibuat / diubah
 
-### Sesi ini
+### Sesi v1.1.1 — pemangkasan copy (25 Oktober 2026)
+- `src/app/page.tsx` — deskripsi beranda dipangkas; klausa "lalu buka halaman profil lengkap" dihapus; kalimat kedua dipisah baris.
+- `src/app/login/page.tsx` — hapus paragraf "Login hanya untuk admin angkatan…", "Gunakan akun yang sudah terdaftar di Supabase Auth.", dan "Tidak ada pendaftaran publik…".
+- `package.json`, `package-lock.json` — versi `1.1.1`.
+- `handoff.md` — status, rilis, dan catatan sesi diperbarui.
+- Verifikasi: `npm run lint`, `npm run typecheck`, dan `npm run build` bersih.
+- Commit `v1.1.1` dibuat; tag `v1.1.1` belum dibuat.
+
+### Sesi audit & indexing (25 Oktober 2026 — read-only)
+- Tidak ada perubahan kode aplikasi. Produksi tetap v1.1.0.
+- `handoff.md` — diperbarui dengan status PAUSED, temuan audit, dan hasil reindex.
+- `opencode.json` — **perubahan lokal belum di-commit**: `codebase-memory-mcp_*` diset `true` (seharusnya `false` sesuai kebijakan; hanya watcher yang boleh aktif). Jangan panggil tool MCP.
+
+### Sesi implementasi (sebelum audit)
 - `src/app/layout.tsx` — import & variable `IBM_Plex_Sans` / `IBM_Plex_Mono` (`--font-plex-*`).
 - `src/app/globals.css` — `--font-sans` / `--font-mono` dan `body` memakai Plex.
 - `src/components/admin/delete-student-button.tsx` — listener `close` native + tutup eksplisit di Batal.
@@ -92,26 +136,24 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 
 ## 4. Next Steps (spesifik)
 
-1. **Bagikan kode akses baru ke angkatan.**
-   Kode ada di `.env.local` (`CIPHER_ACCESS_CODE`) dan dashboard Vercel (Secret). Jangan tulis kode di dokumen yang dibagikan publik. Jika kode perlu dirotasi lagi:
-   ```powershell
-   vercel env add CIPHER_ACCESS_SECRET production --value "<acak 32+ byte>" --yes --sensitive --force
-   vercel env add CIPHER_ACCESS_CODE production --value "<kode baru>" --yes --force
-   vercel --prod --yes
-   ```
-   Konsekuensi: semua cookie lama invalid, semua pengguna harus memasukkan kode baru.
+1. **PAUSED — jangan implementasi tanpa rencana.**
+   Pengguna akan memberi rencana berikutnya. Titik henti: commit `v1.1.1` (di atas `main` `307880a`, `v1.1.0`); tag belum dibuat. Produksi masih `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9`.
 
-2. **Hitung ulang skor audit penuh (opsional).**
-   Detector sudah 0 temuan; skor 15/20 yang lama belum diukur ulang. Jalankan `/impeccable audit` bila ingin memperbarui skor dan ringkasan. Target detector tetap ≤1 temuan per halaman.
+2. **Saat rencana diberikan:** mulai dari temuan §2a. Urutan aman: P1 (overflow query, aria-label admin, privasi RPC) → P2 (404, profil mobile, target sentuh, copy, login, admin mobile) → P3.
 
-3. **Pertimbangkan regresi admin permanen.**
+3. **Sebelum sesi ordinary:** kembalikan `opencode.json` `codebase-memory-mcp_*` ke `false`; jangan panggil tool MCP. Watcher tetap boleh berjalan.
+
+4. **Regresi admin permanen (opsional).**
    Skrip Playwright sementara sudah dihapus setelah lolos 10/10. Bila ingin regression suite permanen, tambahkan `playwright` sebagai devDependency dan pindahkan alur (login → tabel → dialog → CRUD uji → cleanup) ke `scripts/`.
 
-4. **Housekeeping rutin.**
-   Folder temp `C:\Users\Axioo\AppData\Local\Temp\opencode\` sudah dibersihkan dari probe sesi ini (`gate-*`, `admin-check`, `audit-cdp`, `visual-check`, screenshot, `recover`, `audit-profile`). File lama milik proyek lain tidak disentuh.
-
 5. **Watcher Codebase Memory sudah aktif.**
-   Daemon `active (session-managed)`, watcher `tree` poll 5 detik, index `433/804` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
+   Daemon `active (session-managed)`, watcher `git` poll 5 detik, index `433/806` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
+
+6. **Housekeeping.**
+   Profil Chrome headless dan screenshot audit (`%TEMP%\cipher-audit-*`) sudah dihapus. Folder temp probe sesi sebelumnya sudah dibersihkan. `.env.local` tetap jangan di-commit.
+
+7. **Distribusi kode akses (jika belum).**
+   Kode ada di `.env.local` (`CIPHER_ACCESS_CODE`) dan dashboard Vercel (Secret). Jangan tulis kode di dokumen publik. Jika perlu rotasi, gunakan `vercel env add ... --force` lalu `vercel --prod --yes`; semua cookie lama akan invalid.
 
 ---
 
@@ -126,3 +168,6 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 - **Detector butuh `networkidle`**; bila ada request menggantung, deteksi akan `Navigation timeout of 30000 ms`.
 - **Uji dialog**: setelah Escape/close, tunggu konten `<dialog>` benar-benar dilepas sebelum menghitung `h2`. Assertion langsung setelah atribut `open` hilang bisa menangkap frame sebelum React menyelesaikan render.
 - **Auth admin** untuk uji lokal: `node --env-file=.env.local` (jangan pernah commit `.env.local`; mesin ini juga menyimpan `SUPABASE_SERVICE_ROLE_KEY`).
+- **`opencode.json` lokal saat ini tidak sesuai kebijakan**: `codebase-memory-mcp_*` diset `true` dan belum di-commit. Jangan panggil tool MCP; kembalikan ke `false` sebelum sesi ordinary. Watcher tetap boleh aktif.
+- **Detector `impeccable` 0 temuan bukan jaminan**: ia tidak menangkap overflow query panjang, accessible name dari teks `hidden`, konteks copy 404, atau hierarki mobile. Tetap audit manual di produksi.
+- **Bersihkan Chrome audit**: proses `chrome.exe` dengan `--remote-debugging-port=9222` dan folder `%TEMP%\cipher-audit-*` harus dihentikan/dihapus setelah audit agar tidak menggantung.
