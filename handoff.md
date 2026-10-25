@@ -1,7 +1,7 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
 Terakhir diperbarui: 25 Oktober 2026
-Status: **PAUSED di v1.1.1** — pemangkasan copy selesai; menunggu rencana berikutnya dari pengguna.
+Status: **v1.1.1 deployed** — pemangkasan copy selesai; menunggu rencana berikutnya dari pengguna. Push git belum dilakukan (remote belum dikonfigurasi).
 Produksi: https://cipher-ti25.vercel.app
 Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`, tag `v1.0.0` di `fdacd45`; rilis `v1.1.0` di commit ini)
 
@@ -11,7 +11,7 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 
 | Area | Status |
 |---|---|
-| Status proyek | **Berhenti di v1.1.1**; menunggu rencana berikutnya |
+| Status proyek | **v1.1.1 deployed**; menunggu rencana berikutnya |
 | Fitur inti (pencarian, profil, admin CRUD) | Selesai, live di produksi |
 | Gerbang kode angkatan (`/masuk`) | Selesai; kode + secret sudah dirotasi di Vercel |
 | Audit UI/UX (`impeccable`) | Detector 0 temuan di 7 halaman × 2 viewport; **bukan bukti bebas isu** — audit manual menemukan P1/P2 (lihat §2a) |
@@ -19,9 +19,9 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 | Tipografi | Geist diganti IBM Plex Sans + IBM Plex Mono; `overused-font` hilang |
 | `npm run lint` / `typecheck` / `build` | Bersih (25 Oktober 2026) |
 | Regresi admin (Playwright) | 10/10 lolos di produksi |
-| Deploy terakhir | `vercel --prod` → `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9` (tidak ada deploy baru setelah audit) |
-| Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda; `v1.1.1` = pemangkasan copy beranda + login (commit, tag belum dibuat) |
-| Version control | `main` di `307880a` (`v1.1.0`); commit `v1.1.1` berisi `src/app/page.tsx`, `src/app/login/page.tsx`, `package.json`, `package-lock.json`, `handoff.md`; `opencode.json` tetap modified dan tidak di-commit |
+| Deploy terakhir | `vercel --prod` → `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn` (alias `https://cipher-ti25.vercel.app`) |
+| Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda; `v1.1.1` = pemangkasan copy beranda + login (commit `abfae27`, tag `v1.1.1`, deployed) |
+| Version control | Rilis `v1.1.1` di `abfae27`, tag annotated `v1.1.1`; commit docs deploy setelahnya; **remote belum dikonfigurasi** sehingga push belum bisa; `opencode.json` tetap modified dan tidak di-commit |
 | Codebase Memory watcher | Aktif (`git`, poll 5 dtk); index **433 nodes / 806 edges**, reindex 25 Oktober 2026 06:12 UTC, status `ready`; tools MCP tetap tidak dipakai |
 
 Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node`, dan `npm run ...` langsung.
@@ -100,7 +100,8 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 - `package.json`, `package-lock.json` — versi `1.1.1`.
 - `handoff.md` — status, rilis, dan catatan sesi diperbarui.
 - Verifikasi: `npm run lint`, `npm run typecheck`, dan `npm run build` bersih.
-- Commit `v1.1.1` dibuat; tag `v1.1.1` belum dibuat.
+- Commit `abfae27` dan tag annotated `v1.1.1` dibuat; deploy produksi `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn` `READY` di `https://cipher-ti25.vercel.app`.
+- Push belum bisa: repo lokal tidak punya remote.
 
 ### Sesi audit & indexing (25 Oktober 2026 — read-only)
 - Tidak ada perubahan kode aplikasi. Produksi tetap v1.1.0.
@@ -137,7 +138,7 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 ## 4. Next Steps (spesifik)
 
 1. **PAUSED — jangan implementasi tanpa rencana.**
-   Pengguna akan memberi rencana berikutnya. Titik henti: commit `v1.1.1` (di atas `main` `307880a`, `v1.1.0`); tag belum dibuat. Produksi masih `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9`.
+   Pengguna akan memberi rencana berikutnya. Titik henti: commit `abfae27` (`v1.1.1`), tag annotated `v1.1.1`, produksi `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn`.
 
 2. **Saat rencana diberikan:** mulai dari temuan §2a. Urutan aman: P1 (overflow query, aria-label admin, privasi RPC) → P2 (404, profil mobile, target sentuh, copy, login, admin mobile) → P3.
 
@@ -154,6 +155,9 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 
 7. **Distribusi kode akses (jika belum).**
    Kode ada di `.env.local` (`CIPHER_ACCESS_CODE`) dan dashboard Vercel (Secret). Jangan tulis kode di dokumen publik. Jika perlu rotasi, gunakan `vercel env add ... --force` lalu `vercel --prod --yes`; semua cookie lama akan invalid.
+
+8. **Push (tertunda — butuh URL remote).**
+   Repo lokal belum punya remote. Setelah URL diberikan: `git remote add origin <URL>`, lalu `git push -u origin main --tags`.
 
 ---
 
