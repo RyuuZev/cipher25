@@ -1,9 +1,9 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
 Terakhir diperbarui: 26 Oktober 2026
-Status: **v1.2.1 deployed** — temuan audit P1/P2/P3 sudah diperbaiki, bug pencarian produksi ("Database belum siap" / "requested path is invalid") sudah dibereskan dan diverifikasi render server-side. Push git belum dilakukan (remote belum dikonfigurasi).
+Status: **v1.2.1 deployed & di-push** — temuan audit P1/P2/P3 sudah diperbaiki, bug pencarian produksi ("Database belum siap" / "requested path is invalid") sudah dibereskan dan diverifikasi render server-side. Remote `origin` = `https://github.com/RyuuZev/cipher25`.
 Produksi: https://cipher-ti25.vercel.app
-Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`; tag `v1.0.0`, `v1.1.0`, `v1.1.1`, `v1.2.0`, `v1.2.1`)
+Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main` tracking `origin/main`; tag `v1.0.0`, `v1.1.0`, `v1.1.1`, `v1.2.0`, `v1.2.1`; remote `https://github.com/RyuuZev/cipher25`)
 
 ---
 
@@ -21,7 +21,7 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 | Regresi admin (Playwright) | 10/10 lolos di produksi |
 | Deploy terakhir | `vercel --prod` → `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn` (alias `https://cipher-ti25.vercel.app`) |
 | Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda; `v1.1.1` = pemangkasan copy beranda + login (commit `abfae27`, tag `v1.1.1`, deployed) |
-| Version control | Rilis `v1.1.1` di `abfae27`, tag annotated `v1.1.1`; commit docs deploy setelahnya; **remote belum dikonfigurasi** sehingga push belum bisa; `opencode.json` tetap modified dan tidak di-commit |
+| Version control | Remote `origin` = `https://github.com/RyuuZev/cipher25`; `main` sudah di-push (merge `9d56ef7` dengan `Initial commit` remote; README lokal dipertahankan, LICENSE dari remote diambil); semua tag `v1.0.0`–`v1.2.1` sudah di-push |
 | Codebase Memory watcher | Aktif (`git`, poll 5 dtk); index **436 nodes / 821 edges**, reindex 25 Oktober 2026 07:20 UTC, status `ready`; tools MCP tetap tidak dipakai |
 
 Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node`, dan `npm run ...` langsung.
@@ -183,8 +183,9 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 7. **Distribusi kode akses (jika belum).**
    Kode ada di `.env.local` (`CIPHER_ACCESS_CODE`) dan dashboard Vercel (Secret). Jangan tulis kode di dokumen publik. Jika perlu rotasi, gunakan `vercel env add ... --force` lalu `vercel --prod --yes`; semua cookie lama akan invalid.
 
-8. **Push (tertunda — butuh URL remote).**
-   Repo lokal belum punya remote. Setelah URL diberikan: `git remote add origin <URL>`, lalu `git push -u origin main --tags`.
+8. **Push sudah selesai (26 Oktober 2026).**
+   Remote `origin` = `https://github.com/RyuuZev/cipher25`. `git push -u origin main` sukses setelah merge `--allow-unrelated-histories` dengan `Initial commit` (README lokal dipertahankan, LICENSE remote diambil). `git push origin --all` up-to-date; `git push origin --tags` mengirim `v1.0.0`–`v1.2.1`.
+   Verifikasi: tree remote 74 file, satu-satunya file env yang ter-track adalah `.env.local.example`; tidak ada `.env.local`, `Foto/`, `Informasi Angkatan TI 25 - DB.csv`, `.agents/`, `.opencode/`, atau `.vercel`.
 
 ---
 
