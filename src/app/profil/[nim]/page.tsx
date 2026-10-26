@@ -155,11 +155,11 @@ export default async function ProfilePage({ params }: ProfileProps) {
           ) : null}
         </div>
 
-        <div className="surface relative mx-auto w-full max-w-[17rem] overflow-hidden rounded-3xl p-3 sm:max-w-[20rem] lg:order-1 lg:mx-0 lg:max-w-none">
+        <div className="surface relative mx-auto w-full max-w-none overflow-hidden rounded-3xl p-3 sm:max-w-[22rem] lg:order-1 lg:mx-0 lg:max-w-none">
           <StudentPhoto
             student={student}
             className="aspect-[4/5] w-full"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 22rem, 380px"
             priority
             rounded="rounded-2xl"
             decorative

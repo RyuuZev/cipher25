@@ -1,7 +1,7 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
 Terakhir diperbarui: 26 Oktober 2026
-Status: **v1.2.2 deployed & di-push** — temuan audit P1/P2/P3 sudah diperbaiki, sisa temuan P2/P3 yang semula parsial dibereskan di v1.2.2. Remote `origin` = `https://github.com/RyuuZev/cipher25`.
+Status: **v1.2.3 deployed & di-push** — temuan audit P1/P2/P3 sudah diperbaiki, sisa temuan P2/P3 dibereskan di v1.2.2, dan porsi foto profil di ponsel diperbesar di v1.2.3. Remote `origin` = `https://github.com/RyuuZev/cipher25`.
 Produksi: https://cipher-ti25.vercel.app
 Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main` tracking `origin/main`; tag `v1.0.0`, `v1.1.0`, `v1.1.1`, `v1.2.0`, `v1.2.1`; remote `https://github.com/RyuuZev/cipher25`)
 
@@ -123,6 +123,15 @@ Verifikasi ulang kode menunjukkan beberapa item yang diklaim selesai di v1.2.0 t
 - **Copy dihapus (permintaan pengguna):** paragraf "Profil ini merupakan bagian dari database angkatan CIPHER…" di halaman profil dihapus.
 
 Verifikasi: `lint`/`typecheck`/`build` bersih; render lokal dengan cookie gate: `/?q=` menampilkan nama, `/profil/<nim>` 200 dengan urutan identitas-sebelum-foto, paragraf lama 0 kemunculan, 404 benar, `/admin` 307 ke `/login` saat belum login.
+
+---
+
+## 2d. Sesi v1.2.3 — foto profil responsif (26 Oktober 2026)
+
+- Kartu foto profil di ponsel dibuat selebar kolom: `w-full max-w-none` (bukan lagi `max-w-[17rem]`), `sm:max-w-[22rem]`, dan tetap kolom 380px di `lg`.
+- `sizes` gambar disesuaikan agar Next/Image memilih varian yang tajam: `(max-width: 640px) 100vw, (max-width: 1024px) 22rem, 380px`.
+- Terukur via CDP di 390×844: kartu 358px, foto 332×415 (sebelumnya 272px / 248×310), `scrollWidth` tetap 390 (tanpa overflow). Di 320px foto ±264×330.
+- Urutan tetap: identitas (nama/NIM) → detail → Instagram → foto. Pengguna menyatakan porsi ini sudah pas.
 
 ---
 
