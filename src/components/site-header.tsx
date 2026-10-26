@@ -15,7 +15,7 @@ export function SiteHeader() {
         Lewati ke konten
       </a>
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href={isAuthPage ? "/masuk" : "/"} prefetch={false} className="group flex min-h-11 items-center gap-3">
+        <Link href="/" prefetch={false} className="group flex min-h-11 items-center gap-3">
           <Image
             src="/cipher-mark.webp"
             alt=""

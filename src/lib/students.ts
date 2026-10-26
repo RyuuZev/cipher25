@@ -1,32 +1,17 @@
 import { cache } from "react";
 
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import type { Student } from "@/lib/types";
-
-async function fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: "Request failed" }));
-    throw new Error(err.error ?? `HTTP ${res.status}`);
-  }
-  return res.json();
-}
 
 export async function searchStudents(query: string): Promise<Student[]> {
   const q = query.trim();
   if (q.length < 2) return [];
 
-  return fetchJson<Student[]>("/api/search", {
-    method: "POST",
-    body: JSON.stringify({ q }),
-  });
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("search_students", { q });
+  if (error) throw new Error(error.message);
+  return (data ?? []) as Student[];
 }
 
 export const getStudentByNim = cache(
@@ -34,10 +19,15 @@ export const getStudentByNim = cache(
     const trimmed = nim.trim();
     if (!trimmed) return null;
 
-    const student = await fetchJson<Student | null>(
-      `/api/student/${encodeURIComponent(trimmed)}`,
-    );
-    return student;
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("students")
+      .select("*")
+      .eq("nim", trimmed)
+      .maybeSingle();
+
+    if (error) throw new Error(error.message);
+    return (data as Student | null) ?? null;
   },
 );
 

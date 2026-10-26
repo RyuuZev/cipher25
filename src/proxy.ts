@@ -8,7 +8,8 @@ const GATED_PREFIXES = ["/profil"];
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const gated =
-    pathname === "/" || GATED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+    pathname === "/" ||
+    GATED_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 
   if (gated) {
     const unlocked = await isValidToken(

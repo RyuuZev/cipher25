@@ -95,7 +95,8 @@ async function Results({ query }: { query: string }) {
 
   try {
     results = await searchStudents(query);
-  } catch {
+  } catch (err) {
+    console.error("searchStudents error:", err);
     error = "Pencarian gagal. Database belum siap. Hubungi pengurus.";
   }
 

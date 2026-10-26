@@ -1,9 +1,9 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
-Terakhir diperbarui: 25 Oktober 2026
-Status: **v1.1.1 deployed** — pemangkasan copy selesai; menunggu rencana berikutnya dari pengguna. Push git belum dilakukan (remote belum dikonfigurasi).
+Terakhir diperbarui: 26 Oktober 2026
+Status: **v1.2.1 deployed** — temuan audit P1/P2/P3 sudah diperbaiki, bug pencarian produksi ("Database belum siap" / "requested path is invalid") sudah dibereskan dan diverifikasi render server-side. Push git belum dilakukan (remote belum dikonfigurasi).
 Produksi: https://cipher-ti25.vercel.app
-Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`, tag `v1.0.0` di `fdacd45`; rilis `v1.1.0` di commit ini)
+Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main`; tag `v1.0.0`, `v1.1.0`, `v1.1.1`, `v1.2.0`, `v1.2.1`)
 
 ---
 
@@ -92,7 +92,34 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 
 ---
 
+## 2b. Sesi v1.2.1 — perbaikan audit + bug pencarian produksi (26 Oktober 2026)
+
+**Perbaikan audit P1-P3 (commit `5523565`, tag `v1.2.0`)**
+- P1-1 overflow query panjang: `<h2>` query dipenggal (`truncate` + `max-w`), input dibatasi `maxLength`.
+- P1-2 nama aksesibel link admin mobile: `aria-label` ditambahkan.
+- P1-3 batas privasi: `EXECUTE` pada `search_students`/`get_student` dicabut dari `anon`, diberikan ke `authenticated`; dibuat route proxy server-side `/api/search` (POST) dan `/api/student/[nim]` (GET) memakai `createAdminClient()` (service role, tidak pernah ke browser).
+- P2-4..P2-10 dan P3-11..P3-12: 404 konteks umum, profil mobile, target sentuh 44px, copy internal dihapus, hierarki login, tabel admin horizontal-scroll + caption/`scope`, loop `/masuk` (logo selalu ke `/`), `aria-describedby` search, `prefers-reduced-motion` mematikan `breathe`.
+
+**Bug produksi "Pencarian gagal. Database belum siap" (fixed di `v1.2.1`)**
+- Akar masalah: `src/lib/students.ts` memanggil `fetch("/api/search")` dan `fetch("/api/student/...")` dari **Server Component**. URL relatif tidak bisa dipakai di server; percobaan memakai absolute URL jatuh ke `NEXT_PUBLIC_SUPABASE_URL` sehingga Supabase membalas `requested path is invalid`.
+- Perbaikan final: `searchStudents()` memanggil `supabase.rpc("search_students", { q })` dan `getStudentByNim()` query `students` langsung, keduanya via `createAdminClient()`. Tidak ada HTTP internal lagi.
+- Route `/api/search` dan `/api/student/[nim]` **dipertahankan** sebagai endpoint terpisah (aman: service role hanya di server), walau tidak lagi dipakai komponen aplikasi.
+- Verifikasi: gate dibuka sementara lalu `curl https://cipher-ti25.vercel.app/?q=2510817110017` mengembalikan `Hasil pencarian` + `Abdurrazak`; gate lalu dikembalikan dan `/?q=...` kembali 307 ke `/masuk`.
+- Uji Playwright sementara (`test-api.spec.ts`, `test-ui.spec.ts`) dan devDependency `@playwright/test` sudah dihapus lagi.
+
+---
+
 ## 3. File yang dibuat / diubah
+
+### Sesi v1.2.1 — fix pencarian produksi (26 Oktober 2026)
+- `src/lib/students.ts` — `searchStudents`/`getStudentByNim` query Supabase langsung (admin client + RPC), `fetchJson` dihapus.
+- `src/app/page.tsx` — `console.error` error asli di `Results`, pesan ke pengguna tetap generik.
+- `src/proxy.ts` — hanya perubahan format (gate tidak berubah).
+- `src/components/site-header.tsx` — logo selalu `href="/"`.
+- `src/app/api/search/route.ts`, `src/app/api/student/[nim]/route.ts` — route proxy service-role dipertahankan.
+- `package.json`, `package-lock.json` — versi `1.2.1`; `@playwright/test` dilepas kembali.
+- `handoff.md` — status, temuan, dan jebakan baru diperbarui.
+- Verifikasi: `npm run lint` / `typecheck` / `build` bersih; produksi `READY` di `https://cipher-ti25.vercel.app`.
 
 ### Sesi v1.1.1 — pemangkasan copy (25 Oktober 2026)
 - `src/app/page.tsx` — deskripsi beranda dipangkas; klausa "lalu buka halaman profil lengkap" dihapus; kalimat kedua dipisah baris.
@@ -137,21 +164,21 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 
 ## 4. Next Steps (spesifik)
 
-1. **PAUSED — jangan implementasi tanpa rencana.**
-   Pengguna akan memberi rencana berikutnya. Titik henti: commit `abfae27` (`v1.1.1`), tag annotated `v1.1.1`, produksi `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn`.
+1. **Status saat ini:** `v1.2.1` deployed dan pencarian (NIM/nama) sudah terverifikasi bekerja di produksi.
+   Titik henti terakhir: commit `v1.2.1` (lihat `git log -1`), produksi `READY` di `https://cipher-ti25.vercel.app`.
 
-2. **Saat rencana diberikan:** mulai dari temuan §2a. Urutan aman: P1 (overflow query, aria-label admin, privasi RPC) → P2 (404, profil mobile, target sentuh, copy, login, admin mobile) → P3.
+2. **Sisa yang belum diverifikasi manual:** hasil perbaikan audit P2 (profil mobile, target sentuh, tabel admin mobile, hierarki login) baru dicek lewat build, belum audit ulang di produksi. Bila ingin, jalankan audit manual 320–1440 sebelum rilis berikutnya.
 
 3. **Sebelum sesi ordinary:** kembalikan `opencode.json` `codebase-memory-mcp_*` ke `false`; jangan panggil tool MCP. Watcher tetap boleh berjalan.
 
 4. **Regresi admin permanen (opsional).**
-   Skrip Playwright sementara sudah dihapus setelah lolos 10/10. Bila ingin regression suite permanen, tambahkan `playwright` sebagai devDependency dan pindahkan alur (login → tabel → dialog → CRUD uji → cleanup) ke `scripts/`.
+   Skrip Playwright sementara sudah dihapus setelah lolos. Bila ingin regression suite permanen, tambahkan `playwright` sebagai devDependency dan pindahkan alur (login → tabel → dialog → CRUD uji → cleanup) ke `scripts/`.
 
 5. **Watcher Codebase Memory sudah aktif.**
-   Daemon `active (session-managed)`, watcher `git` poll 5 detik, index `436/821` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
+   Watcher `git` poll 5 detik. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
 
 6. **Housekeeping.**
-   Profil Chrome headless dan screenshot audit (`%TEMP%\cipher-audit-*`) sudah dihapus. Folder temp probe sesi sebelumnya sudah dibersihkan. `.env.local` tetap jangan di-commit.
+   File test Playwright sementara (`test-api.spec.ts`, `test-ui.spec.ts`), `test-results/`, dan `debug-*.png` sudah dihapus. `.env.local` tetap jangan di-commit.
 
 7. **Distribusi kode akses (jika belum).**
    Kode ada di `.env.local` (`CIPHER_ACCESS_CODE`) dan dashboard Vercel (Secret). Jangan tulis kode di dokumen publik. Jika perlu rotasi, gunakan `vercel env add ... --force` lalu `vercel --prod --yes`; semua cookie lama akan invalid.
@@ -163,6 +190,10 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 
 ## 5. Jebakan yang sudah ditemukan (jangan diulang)
 
+- **Jangan `fetch("...")` dari Server Component.** URL relatif gagal di server; bila dipaksa absolute dengan `NEXT_PUBLIC_SUPABASE_URL`, Supabase membalas `requested path is invalid`. Query Supabase langsung lewat `createAdminClient()`/`createClient()`, atau pakai `fetch` hanya di Client Component dengan `window.location.origin`.
+- **Error handler yang menelan pesan asli memperlambat debugging.** Selalu `console.error` error asli sambil menampilkan pesan generik ke pengguna.
+- **Verifikasi render server-side butuh cookie gate.** `curl` tanpa cookie akan 307 ke `/masuk`; untuk sementara buka gate (`isValidToken`/`proxy.ts`), verifikasi, lalu **wajib** kembalikan dan redeploy.
+- **`vercel env add` untuk env baru tidak selalu terbaca middleware Edge pada deploy berikutnya**; lebih andal mengubah kode sementara daripada mengandalkan flag env.
 - **Prefetch route terkunci**: `Link href="/"` dari halaman ber-gate membuat request RSC memantul 307 ke `/masuk` dan tidak pernah selesai → `waitUntil: "networkidle"` timeout. Selalu `prefetch={false}` untuk tautan lintas gate.
 - **`max-w-[62ch]` menipu di Geist 12px** (1ch ≈ 7,96px → ±88 karakter). Pakai rem: `26rem` ≈ 75 karakter. Untuk IBM Plex, tetap verifikasi dengan pengukuran, jangan asumsi `ch`.
 - **PowerShell**: `$HOME` read-only; pakai `-LiteralPath` untuk path ber-`[ ]`; jangan merangkai banyak `-replace` dalam satu baris. Edit file lewat tool edit/write, bukan regex massal.
