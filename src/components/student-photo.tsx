@@ -10,6 +10,7 @@ type StudentPhotoProps = {
   sizes?: string;
   priority?: boolean;
   rounded?: string;
+  decorative?: boolean;
 };
 
 export function StudentPhoto({
@@ -18,6 +19,7 @@ export function StudentPhoto({
   sizes = "(max-width: 768px) 100vw, 320px",
   priority = false,
   rounded = "rounded-2xl",
+  decorative = false,
 }: StudentPhotoProps) {
   const src = fotoPublicUrl(student.foto_path);
 
@@ -32,7 +34,7 @@ export function StudentPhoto({
       {src ? (
         <Image
           src={src}
-          alt={`Foto ${student.nama}`}
+          alt={decorative ? "" : `Foto ${student.nama}`}
           fill
           sizes={sizes}
           priority={priority}

@@ -142,14 +142,23 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
       </div>
 
       <div className="surface overflow-hidden rounded-2xl">
-        <div className="overflow-x-auto" tabIndex={0} aria-label="Tabel mahasiswa">
+        <div
+          className="overflow-x-auto"
+          tabIndex={0}
+          role="region"
+          aria-label="Tabel mahasiswa"
+        >
           <table className="w-full min-w-[0] text-left text-sm">
+            <caption className="sr-only">
+              Daftar mahasiswa angkatan CIPHER
+              {query ? `, hasil pencarian "${query}"` : ""}
+            </caption>
             <thead>
               <tr className="border-b border-line/80 text-xs uppercase tracking-[0.16em] text-muted">
                 <th scope="col" className="px-4 py-3 font-medium">Mahasiswa</th>
                 <th scope="col" className="px-4 py-3 font-medium">NIM</th>
-                <th scope="col" className="px-4 py-3 font-medium">TTL</th>
-                <th scope="col" className="px-4 py-3 font-medium">Angkatan</th>
+                <th scope="col" className="hidden px-4 py-3 font-medium sm:table-cell">TTL</th>
+                <th scope="col" className="hidden px-4 py-3 font-medium sm:table-cell">Angkatan</th>
                 <th scope="col" className="px-4 py-3 text-right font-medium">Aksi</th>
               </tr>
             </thead>
@@ -182,6 +191,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                           </p>
                           <p className="text-xs text-muted">
                             {student.prodi}
+                            <span className="sm:hidden"> · {student.angkatan}</span>
                           </p>
                         </div>
                       </div>
@@ -189,10 +199,10 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                     <td className="px-4 py-3 font-mono text-xs tracking-wider text-muted">
                       {student.nim}
                     </td>
-                    <td className="max-w-[220px] truncate px-4 py-3 text-xs text-muted">
+                    <td className="hidden max-w-[220px] truncate px-4 py-3 text-xs text-muted sm:table-cell">
                       {student.ttl ?? "—"}
                     </td>
-                    <td className="px-4 py-3 font-mono text-xs text-muted">
+                    <td className="hidden px-4 py-3 font-mono text-xs text-muted sm:table-cell">
                       {student.angkatan}
                     </td>
                     <td className="px-4 py-2">

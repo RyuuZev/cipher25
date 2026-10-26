@@ -9,13 +9,14 @@ export function StudentCard({ student }: { student: Student }) {
     <Link
       href={`/profil/${student.nim}`}
       className="surface surface-hover group flex items-center gap-4 rounded-2xl p-3"
-      aria-label={`${student.nama}, ${student.nim}`}
     >
+      <span className="sr-only">Buka profil </span>
       <StudentPhoto
         student={student}
         className="size-16 shrink-0 sm:size-20"
         sizes="80px"
         rounded="rounded-xl"
+        decorative
       />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold text-fg group-hover:text-neon-soft">
@@ -28,7 +29,10 @@ export function StudentCard({ student }: { student: Student }) {
           {student.prodi} · {student.angkatan}
         </p>
       </div>
-      <ArrowUpRight className="size-4 shrink-0 text-muted transition-colors group-hover:text-neon" />
+      <ArrowUpRight
+        className="size-4 shrink-0 text-muted transition-colors group-hover:text-neon"
+        aria-hidden="true"
+      />
     </Link>
   );
 }

@@ -51,6 +51,10 @@ export default async function MasukPage({ searchParams }: MasukPageProps) {
           <p className="mt-4 text-center font-mono text-xs tracking-[0.16em] text-muted">
             CIPHER / TI 2025
           </p>
+
+          <p className="mt-2 text-center text-xs leading-relaxed text-muted">
+            Lupa kode angkatan? Hubungi pengurus angkatan.
+          </p>
         </div>
       </main>
       <SiteFooter />

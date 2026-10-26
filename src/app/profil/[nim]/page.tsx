@@ -78,7 +78,8 @@ export default async function ProfilePage({ params }: ProfileProps) {
 
   try {
     student = await getStudentByNim(nim);
-  } catch {
+  } catch (err) {
+    console.error("getStudentByNim error:", err);
     failed = true;
   }
 
@@ -93,27 +94,7 @@ export default async function ProfilePage({ params }: ProfileProps) {
   return (
     <ProfileShell>
       <div className="grid gap-6 lg:grid-cols-[380px_1fr] lg:items-start">
-        <div className="surface relative overflow-hidden rounded-3xl p-3 max-h-[60vh] md:max-h-none">
-          <StudentPhoto
-            student={student}
-            className="aspect-[4/5] w-full"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
-            priority
-            rounded="rounded-2xl"
-          />
-          <div className="pointer-events-none absolute inset-x-3 bottom-3 flex items-end justify-between rounded-2xl bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-4 pt-16">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.16em] text-neon/80">
-                CIPHER · TI 2025
-              </p>
-              <p className="mt-1 font-mono text-xs tracking-[0.16em] text-fg-secondary">
-                {student.nim}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="animate-rise">
+        <div className="animate-rise lg:order-2">
           <Link
             href="/"
             prefetch={false}
@@ -172,12 +153,27 @@ export default async function ProfilePage({ params }: ProfileProps) {
               {handle ?? "Instagram"}
             </a>
           ) : null}
+        </div>
 
-          <p className="mt-8 max-w-[26rem] text-xs leading-relaxed text-muted">
-            Profil ini merupakan bagian dari database angkatan CIPHER. Halaman
-            ini tidak diindeks mesin pencari. Hubungi pengurus jika ada
-            informasi yang perlu diperbarui atau data yang ingin dihapus.
-          </p>
+        <div className="surface relative mx-auto w-full max-w-[17rem] overflow-hidden rounded-3xl p-3 sm:max-w-[20rem] lg:order-1 lg:mx-0 lg:max-w-none">
+          <StudentPhoto
+            student={student}
+            className="aspect-[4/5] w-full"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+            priority
+            rounded="rounded-2xl"
+            decorative
+          />
+          <div className="pointer-events-none absolute inset-x-3 bottom-3 flex items-end justify-between rounded-2xl bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-4 pt-16">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-neon/80">
+                CIPHER · TI 2025
+              </p>
+              <p className="mt-1 font-mono text-xs tracking-[0.16em] text-fg-secondary">
+                {student.nim}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </ProfileShell>
@@ -226,8 +222,8 @@ function ProfileNotice() {
         Profil belum bisa ditampilkan
       </h1>
       <p className="mt-2 text-sm leading-relaxed text-muted">
-        Database belum terhubung atau profil tidak ditemukan. Pastikan
-        konfigurasi Supabase dan skema database sudah benar.
+        Data profil belum bisa dimuat saat ini. Coba muat ulang halaman ini, atau
+        kembali ke pencarian dan buka profilnya lagi.
       </p>
       <Link href="/" prefetch={false} className="button-ghost mt-6 text-sm">
         <ArrowLeft className="size-4" />

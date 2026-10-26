@@ -63,7 +63,7 @@ export default async function AdminLayout({
               href="/"
               prefetch={false}
               className="button-ghost text-xs"
-              aria-label="Lihat situs (membuka tab baru)"
+              aria-label="Lihat situs"
             >
               <ExternalLink className="size-3.5" />
             </Link>

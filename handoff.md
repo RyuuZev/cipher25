@@ -1,7 +1,7 @@
 # HANDOFF — CIPHER (Database Mahasiswa TI 2025)
 
 Terakhir diperbarui: 26 Oktober 2026
-Status: **v1.2.1 deployed & di-push** — temuan audit P1/P2/P3 sudah diperbaiki, bug pencarian produksi ("Database belum siap" / "requested path is invalid") sudah dibereskan dan diverifikasi render server-side. Remote `origin` = `https://github.com/RyuuZev/cipher25`.
+Status: **v1.2.2 deployed & di-push** — temuan audit P1/P2/P3 sudah diperbaiki, sisa temuan P2/P3 yang semula parsial dibereskan di v1.2.2. Remote `origin` = `https://github.com/RyuuZev/cipher25`.
 Produksi: https://cipher-ti25.vercel.app
 Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git lokal `main` tracking `origin/main`; tag `v1.0.0`, `v1.1.0`, `v1.1.1`, `v1.2.0`, `v1.2.1`; remote `https://github.com/RyuuZev/cipher25`)
 
@@ -109,7 +109,34 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 
 ---
 
+## 2c. Sesi v1.2.2 — menuntaskan sisa temuan audit (26 Oktober 2026)
+
+Verifikasi ulang kode menunjukkan beberapa item yang diklaim selesai di v1.2.0 ternyata masih parsial. Semua diperbaiki di sini:
+
+- **P2-5 profil mobile (sungguhan):** identitas (kembali, chip, nama, NIM, detail) dipindah ke **atas** foto pada mobile; foto `w-full max-w-[17rem]` (256px) di tengah, `max-w-[20rem]` di `sm`; urutan desktop dipertahankan via `lg:order-1/2` (foto tetap kiri, 380px). Foto diberi `decorative` karena nama sudah ada di `h1`.
+- **P2-7 copy internal (publik):** `ProfileNotice` tidak lagi menyebut "konfigurasi Supabase dan skema database"; kini "Data profil belum bisa dimuat saat ini…". `catch` di `ProfilePage` menambah `console.error("getStudentByNim error:", err)` (sesuai jebakan §5).
+- **P2-10 loop `/masuk`:** logo header memakai `homeHref` — di `/masuk` menuju `/masuk` (tidak lagi 307 memantul); `/masuk` menambah bantuan "Lupa kode angkatan? Hubungi pengurus angkatan."
+- **P2-9 tabel admin mobile:** kolom TTL & Angkatan `hidden sm:table-cell`; angkatan tetap terbaca di mobile lewat `· {angkatan}` di bawah prodi; `<caption className="sr-only">`; container scroll diberi `role="region"` + `aria-label` (sebelumnya `aria-label` pada `<div>` tanpa role tidak diumumkan).
+- **P1-2 sisa label:** `aria-label` "Lihat situs (membuka tab baru)" → "Lihat situs" (memang tidak membuka tab baru).
+- **P3-11:** `StudentPhoto` punya prop `decorative` (alt `""`); kartu hasil pencarian tidak lagi memakai `aria-label` yang membuang prodi/angkatan — kini `sr-only` "Buka profil" + teks terlihat, panah `aria-hidden`.
+- **Token & format:** `text-zinc-300` → `text-fg-subtle`, `border-white/10!` → `border-overlay/10!`; indentasi `page.tsx` dan `search-form.tsx` dirapikan.
+- **Copy dihapus (permintaan pengguna):** paragraf "Profil ini merupakan bagian dari database angkatan CIPHER…" di halaman profil dihapus.
+
+Verifikasi: `lint`/`typecheck`/`build` bersih; render lokal dengan cookie gate: `/?q=` menampilkan nama, `/profil/<nim>` 200 dengan urutan identitas-sebelum-foto, paragraf lama 0 kemunculan, 404 benar, `/admin` 307 ke `/login` saat belum login.
+
+---
+
 ## 3. File yang dibuat / diubah
+
+### Sesi v1.2.2 — sisa audit (26 Oktober 2026)
+- `src/app/profil/[nim]/page.tsx` — urutan mobile, foto lebih kecil, copy umum, `console.error`, paragraf privasi dihapus.
+- `src/components/site-header.tsx` — `homeHref` sadar halaman `/masuk`.
+- `src/app/masuk/page.tsx` — bantuan recovery kode.
+- `src/app/admin/page.tsx` — kolom mobile, `caption`, `role="region"`.
+- `src/app/admin/layout.tsx` — label "Lihat situs".
+- `src/components/student-photo.tsx`, `src/components/student-card.tsx` — alt dekoratif + nama aksesibel kartu.
+- `src/app/page.tsx`, `src/components/search-form.tsx` — token & indentasi.
+- `package.json`, `package-lock.json` — 1.2.2.
 
 ### Sesi v1.2.1 — fix pencarian produksi (26 Oktober 2026)
 - `src/lib/students.ts` — `searchStudents`/`getStudentByNim` query Supabase langsung (admin client + RPC), `fetchJson` dihapus.
@@ -196,6 +223,9 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
 - **Verifikasi render server-side butuh cookie gate.** `curl` tanpa cookie akan 307 ke `/masuk`; untuk sementara buka gate (`isValidToken`/`proxy.ts`), verifikasi, lalu **wajib** kembalikan dan redeploy.
 - **`vercel env add` untuk env baru tidak selalu terbaca middleware Edge pada deploy berikutnya**; lebih andal mengubah kode sementara daripada mengandalkan flag env.
 - **Prefetch route terkunci**: `Link href="/"` dari halaman ber-gate membuat request RSC memantul 307 ke `/masuk` dan tidak pernah selesai → `waitUntil: "networkidle"` timeout. Selalu `prefetch={false}` untuk tautan lintas gate.
+- **`min-w-[0]` pada `<table>` tidak menghapus overflow.** Tabel tetap memakai min-content tiap kolom; kalau kolom tidak dikurangi, kolom Aksi tetap di luar layar. Solusi yang bekerja: sembunyikan kolom non-kritis di bawah `sm` (`hidden sm:table-cell`) dan ringkas informasinya ke kolom yang tersisa.
+- **`aria-label` pada `<div>` biasa tidak dibacakan.** Container scroll butuh `role="region"` (atau elemen berperan) agar labelnya diumumkan; tabel butuh `<caption>` (boleh `sr-only`).
+- **`aria-label` pada link menimpa seluruh teks di dalamnya.** Jangan pakai untuk "mempersingkat" nama; informasi seperti prodi/angkatan ikut hilang dari AX tree. Pakai `sr-only` sebagai awalan dan biarkan teks terlihat yang memberi nama. Hal yang sama untuk `alt` foto: pakai `decorative` bila nama sudah tampil di sebelahnya.
 - **`max-w-[62ch]` menipu di Geist 12px** (1ch ≈ 7,96px → ±88 karakter). Pakai rem: `26rem` ≈ 75 karakter. Untuk IBM Plex, tetap verifikasi dengan pengukuran, jangan asumsi `ch`.
 - **PowerShell**: `$HOME` read-only; pakai `-LiteralPath` untuk path ber-`[ ]`; jangan merangkai banyak `-replace` dalam satu baris. Edit file lewat tool edit/write, bukan regex massal.
 - **`vercel env add --environment`**: argumen berkoma harus dikutip (`"production,preview,development"`); tanpa kutip PowerShell mengubahnya menjadi array dan CLI menolak environment.

@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 export function SiteHeader() {
   const pathname = usePathname();
   const isAuthPage = pathname?.startsWith("/masuk") || pathname?.startsWith("/login") || pathname?.startsWith("/admin");
+  const homeHref = pathname?.startsWith("/masuk") ? "/masuk" : "/";
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-ink/75 backdrop-blur-xl">
@@ -15,7 +16,7 @@ export function SiteHeader() {
         Lewati ke konten
       </a>
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" prefetch={false} className="group flex min-h-11 items-center gap-3">
+        <Link href={homeHref} prefetch={false} className="group flex min-h-11 items-center gap-3">
           <Image
             src="/cipher-mark.webp"
             alt=""

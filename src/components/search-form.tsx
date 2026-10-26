@@ -22,21 +22,21 @@ export function SearchForm({ query }: { query: string }) {
       onSubmit={() => setPending(true)}
     >
       <div className="surface flex flex-col gap-2 rounded-2xl p-2 sm:flex-row sm:items-center">
-<div className="flex flex-1 items-center gap-3 px-3">
-            <Search className="size-5 shrink-0 text-neon/70" />
-            <input
-              type="search"
-              name="q"
-              defaultValue={query}
-              minLength={2}
-              maxLength={100}
-              required
-              autoComplete="off"
-              placeholder="Masukkan NIM atau nama mahasiswa..."
-              className="w-full bg-transparent py-3 text-sm text-fg placeholder:text-muted"
-              aria-label="Cari NIM atau nama"
-              aria-describedby="search-hint"
-            />
+        <div className="flex flex-1 items-center gap-3 px-3">
+          <Search className="size-5 shrink-0 text-neon/70" />
+          <input
+            type="search"
+            name="q"
+            defaultValue={query}
+            minLength={2}
+            maxLength={100}
+            required
+            autoComplete="off"
+            placeholder="Masukkan NIM atau nama mahasiswa..."
+            className="w-full bg-transparent py-3 text-sm text-fg placeholder:text-muted"
+            aria-label="Cari NIM atau nama"
+            aria-describedby="search-hint"
+          />
           {query ? (
             <Link
               href="/"
