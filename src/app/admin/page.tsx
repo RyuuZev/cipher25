@@ -142,15 +142,15 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
       </div>
 
       <div className="surface overflow-hidden rounded-2xl">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] text-left text-sm">
+        <div className="overflow-x-auto" tabIndex={0} aria-label="Tabel mahasiswa">
+          <table className="w-full min-w-[0] text-left text-sm">
             <thead>
               <tr className="border-b border-line/80 text-xs uppercase tracking-[0.16em] text-muted">
-                <th className="px-4 py-3 font-medium">Mahasiswa</th>
-                <th className="px-4 py-3 font-medium">NIM</th>
-                <th className="px-4 py-3 font-medium">TTL</th>
-                <th className="px-4 py-3 font-medium">Angkatan</th>
-                <th className="px-4 py-3 text-right font-medium">Aksi</th>
+                <th scope="col" className="px-4 py-3 font-medium">Mahasiswa</th>
+                <th scope="col" className="px-4 py-3 font-medium">NIM</th>
+                <th scope="col" className="px-4 py-3 font-medium">TTL</th>
+                <th scope="col" className="px-4 py-3 font-medium">Angkatan</th>
+                <th scope="col" className="px-4 py-3 text-right font-medium">Aksi</th>
               </tr>
             </thead>
             <tbody>

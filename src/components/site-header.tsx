@@ -1,15 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { LockKeyhole } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const isAuthPage = pathname?.startsWith("/masuk") || pathname?.startsWith("/login") || pathname?.startsWith("/admin");
+
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-ink/75 backdrop-blur-xl">
       <a href="#konten" className="skip-link">
         Lewati ke konten
       </a>
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" prefetch={false} className="group flex min-h-11 items-center gap-3">
+        <Link href={isAuthPage ? "/masuk" : "/"} prefetch={false} className="group flex min-h-11 items-center gap-3">
           <Image
             src="/cipher-mark.webp"
             alt=""
@@ -30,13 +36,15 @@ export function SiteHeader() {
         </Link>
 
         <nav className="flex items-center gap-2 text-sm">
-          <Link
-            href="/#cari"
-            prefetch={false}
-            className="hidden min-h-11 items-center rounded-lg px-3 text-fg-subtle transition-colors hover:text-neon-soft sm:flex"
-          >
-            Cari
-          </Link>
+          {!isAuthPage && (
+            <Link
+              href="/#cari"
+              prefetch={false}
+              className="hidden min-h-11 items-center rounded-lg px-3 text-fg-subtle transition-colors hover:text-neon-soft sm:flex"
+            >
+              Cari
+            </Link>
+          )}
           <Link href="/login" className="button-ghost text-xs">
             <LockKeyhole className="size-3.5" />
             Admin

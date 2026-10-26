@@ -93,11 +93,11 @@ export default async function ProfilePage({ params }: ProfileProps) {
   return (
     <ProfileShell>
       <div className="grid gap-6 lg:grid-cols-[380px_1fr] lg:items-start">
-        <div className="surface relative overflow-hidden rounded-3xl p-3">
+        <div className="surface relative overflow-hidden rounded-3xl p-3 max-h-[60vh] md:max-h-none">
           <StudentPhoto
             student={student}
             className="aspect-[4/5] w-full"
-            sizes="(max-width: 1024px) 100vw, 380px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
             priority
             rounded="rounded-2xl"
           />

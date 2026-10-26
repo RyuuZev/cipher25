@@ -17,15 +17,14 @@ export default function NotFound() {
           <div className="flex items-center justify-center gap-3">
             <SearchX className="size-5 shrink-0 text-neon-soft" />
             <h1 className="text-2xl font-semibold text-fg">
-              Profil tidak ditemukan
+              Halaman tidak ditemukan
             </h1>
           </div>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            NIM yang kamu masukkan tidak ada di database CIPHER, atau halaman
-            sudah dipindahkan (404).
+            Halaman yang kamu cari tidak ada, atau sudah dipindahkan (404).
           </p>
           <Link href="/" prefetch={false} className="button-primary mt-6 text-sm">
-            Cari profil lain
+            Kembali ke beranda
           </Link>
         </div>
       </main>

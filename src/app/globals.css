@@ -264,7 +264,7 @@ h3 {
 
   .animate-pulse,
   .animate-spin {
-    animation: breathe 1.8s ease-in-out infinite !important;
+    animation: none !important;
   }
 
   .surface-hover:hover,

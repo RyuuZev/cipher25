@@ -49,7 +49,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <ShieldCheck className="size-3.5" />
                 Akses terbatas
               </span>
-              <p className="mt-6 text-3xl font-semibold leading-tight text-fg">
+              <p className="mt-6 text-xl font-semibold leading-tight text-fg">
                 Panel pengurus
                 <span className="mt-1 block font-mono text-sm tracking-[0.24em] text-neon-soft">
                   CIPHER / TI 2025
@@ -78,7 +78,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               Kembali ke pencarian
             </Link>
 
-            <h1 className="mt-6 text-xl font-semibold text-fg">
+            <h1 className="mt-6 text-2xl font-semibold text-fg">
               Masuk sebagai admin
             </h1>
 

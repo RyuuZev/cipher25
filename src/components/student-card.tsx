@@ -9,6 +9,7 @@ export function StudentCard({ student }: { student: Student }) {
     <Link
       href={`/profil/${student.nim}`}
       className="surface surface-hover group flex items-center gap-4 rounded-2xl p-3"
+      aria-label={`${student.nama}, ${student.nim}`}
     >
       <StudentPhoto
         student={student}

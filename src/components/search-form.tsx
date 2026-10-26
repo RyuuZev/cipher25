@@ -22,24 +22,26 @@ export function SearchForm({ query }: { query: string }) {
       onSubmit={() => setPending(true)}
     >
       <div className="surface flex flex-col gap-2 rounded-2xl p-2 sm:flex-row sm:items-center">
-        <div className="flex flex-1 items-center gap-3 px-3">
-          <Search className="size-5 shrink-0 text-neon/70" />
-          <input
-            type="search"
-            name="q"
-            defaultValue={query}
-            minLength={2}
-            required
-            autoComplete="off"
-            placeholder="Masukkan NIM atau nama mahasiswa..."
-            className="w-full bg-transparent py-3 text-sm text-fg placeholder:text-muted"
-            aria-label="Cari NIM atau nama"
-          />
+<div className="flex flex-1 items-center gap-3 px-3">
+            <Search className="size-5 shrink-0 text-neon/70" />
+            <input
+              type="search"
+              name="q"
+              defaultValue={query}
+              minLength={2}
+              maxLength={100}
+              required
+              autoComplete="off"
+              placeholder="Masukkan NIM atau nama mahasiswa..."
+              className="w-full bg-transparent py-3 text-sm text-fg placeholder:text-muted"
+              aria-label="Cari NIM atau nama"
+              aria-describedby="search-hint"
+            />
           {query ? (
             <Link
               href="/"
               prefetch={false}
-              className="grid size-11 place-items-center rounded-lg text-muted transition-colors hover:bg-overlay/5 hover:text-fg-secondary"
+              className="grid size-12 min-w-[48px] min-h-[48px] place-items-center rounded-lg text-muted transition-colors hover:bg-overlay/5 hover:text-fg-secondary"
               aria-label="Hapus pencarian"
             >
               <X className="size-4" />
@@ -59,7 +61,7 @@ export function SearchForm({ query }: { query: string }) {
           {pending ? "Mencari..." : "Cari profil"}
         </button>
       </div>
-      <p className="mt-3 px-2 text-xs text-muted">
+      <p id="search-hint" className="mt-3 px-2 text-xs text-muted">
         Minimal 2 karakter. Contoh: <span className="font-mono text-fg-subtle">2510817</span>{" "}
         atau <span className="text-fg-subtle">Ahmad</span>.
       </p>

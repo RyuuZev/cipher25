@@ -64,7 +64,7 @@ export default async function Home({ searchParams }: HomePageProps) {
           {!configured ? (
             <Notice
               title="Database belum terhubung"
-              description="Isi NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_ANON_KEY di .env.local, lalu jalankan supabase/schema.sql di dashboard Supabase."
+              description="Konfigurasi belum lengkap. Hubungi pengurus untuk menyiapkan database."
             />
           ) : null}
 
@@ -96,20 +96,20 @@ async function Results({ query }: { query: string }) {
   try {
     results = await searchStudents(query);
   } catch {
-    error = "Pencarian gagal. Pastikan skema database sudah dijalankan.";
+    error = "Pencarian gagal. Database belum siap. Hubungi pengurus.";
   }
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.16em] text-muted">
-            Hasil pencarian
-          </p>
-          <h2 className="mt-1 text-xl font-semibold text-fg">
-            &ldquo;{query}&rdquo;
-          </h2>
-        </div>
+<div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-muted">
+                  Hasil pencarian
+                </p>
+                <h2 className="mt-1 text-xl font-semibold text-fg truncate max-w-[90vw] sm:max-w-[60ch]">
+                  &ldquo;{query}&rdquo;
+                </h2>
+              </div>
         <p className="font-mono text-xs tracking-wider text-muted">
           {results.length} profil ditemukan
         </p>

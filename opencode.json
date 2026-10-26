@@ -11,6 +11,6 @@
     }
   },
   "tools": {
-    "codebase-memory-mcp_*": false
+    "codebase-memory-mcp_*": true
   }
 }

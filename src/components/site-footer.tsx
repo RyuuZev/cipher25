@@ -12,7 +12,7 @@ export function SiteFooter() {
             href="https://github.com/RyuuZev"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-sm font-medium text-fg-subtle underline-offset-4 transition-colors hover:text-neon-soft hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon/60"
+            className="rounded-sm font-medium text-fg-subtle underline-offset-4 transition-colors hover:text-neon-soft hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon/60 min-h-[44px] min-w-[44px] flex items-center px-1 py-2"
             aria-label="RyuuZev di GitHub (membuka tab baru)"
           >
             RyuuZev

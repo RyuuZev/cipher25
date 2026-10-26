@@ -59,9 +59,13 @@ export default async function AdminLayout({
             <span className="hidden max-w-[180px] truncate text-xs text-muted md:block">
               {user.email}
             </span>
-            <Link href="/" prefetch={false} className="button-ghost text-xs">
+            <Link
+              href="/"
+              prefetch={false}
+              className="button-ghost text-xs"
+              aria-label="Lihat situs (membuka tab baru)"
+            >
               <ExternalLink className="size-3.5" />
-              <span className="hidden sm:inline">Lihat situs</span>
             </Link>
             <LogoutButton />
           </div>

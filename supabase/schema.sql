@@ -125,8 +125,8 @@ $$;
 
 revoke all on function public.search_students(text) from public;
 revoke all on function public.get_student(text) from public;
-grant execute on function public.search_students(text) to anon, authenticated;
-grant execute on function public.get_student(text) to anon, authenticated;
+grant execute on function public.search_students(text) to authenticated;
+grant execute on function public.get_student(text) to authenticated;
 
 -- ------------------------------------------------------------
 -- Trigger updated_at

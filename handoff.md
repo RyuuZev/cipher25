@@ -22,7 +22,7 @@ Repo lokal: `D:\Penyimpanan Utama\Documents\PROJEK\Website Database CIPHER` (git
 | Deploy terakhir | `vercel --prod` → `dpl_CQKRWUZKLbwniLK4cquSQ6aTjWHn` (alias `https://cipher-ti25.vercel.app`) |
 | Rilis | `v1.0.0` = state produksi sebelum polish; `v1.1.0` = polish kartu beranda; `v1.1.1` = pemangkasan copy beranda + login (commit `abfae27`, tag `v1.1.1`, deployed) |
 | Version control | Rilis `v1.1.1` di `abfae27`, tag annotated `v1.1.1`; commit docs deploy setelahnya; **remote belum dikonfigurasi** sehingga push belum bisa; `opencode.json` tetap modified dan tidak di-commit |
-| Codebase Memory watcher | Aktif (`git`, poll 5 dtk); index **433 nodes / 806 edges**, reindex 25 Oktober 2026 06:12 UTC, status `ready`; tools MCP tetap tidak dipakai |
+| Codebase Memory watcher | Aktif (`git`, poll 5 dtk); index **436 nodes / 821 edges**, reindex 25 Oktober 2026 07:20 UTC, status `ready`; tools MCP tetap tidak dipakai |
 
 Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node`, dan `npm run ...` langsung.
 
@@ -56,8 +56,8 @@ Catatan: `npx` rusak di mesin ini (`ECOMPROMISED`). Pakai `vercel` global, `node
 - **Dialog hapus:** reset state memakai listener `close` native pada `<dialog>` (bukan hanya `onClose` sintetis React); tombol Batal menutup dialog lalu `setOpen(false)`. Dialog bisa dibuka ulang setelah Escape, dan kontennya benar-benar dilepas.
 - **Regresi admin produksi:** login, tabel 67 baris, dialog (h2 tunggal, fokus awal Batal), form tambah, pencarian, edit+simpan, hapus — semua lolos. Data uji `2000000000001` dibersihkan via service role.
 - **Verifikasi visual:** font terpasang (`IBM Plex Sans`/`IBM Plex Mono`), 0 horizontal overflow pada 1440×900 dan 390×844 untuk beranda, profil, login, masuk.
-- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini sudah menjadi git repo lokal). `opencode.json` level proyek meng-enable MCP hanya untuk watcher; `tools` seharusnya `false` (working tree saat ini `true`, lihat §3). `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge; reindex manual terakhir menghasilkan **433 node/806 edge**. Daemon berjalan `session-managed`, watcher `git` poll 5 detik; reindex manual 25 Oktober 2026 06:12 UTC selesai `ready`. Watcher hanya hidup selama sesi opencode/daemon berjalan; config dibaca saat startup.
-- **Reindex manual:** 433 nodes / 806 edges, status `ready`; 1 file parse parsial (`supabase/schema.sql`), 0 unusable/skipped; 7 direktori/12 file tidak diindeks; doc links 18 (2 ambigu, 8 below tier).
+- **Watcher Codebase Memory:** `watcher_enabled`, `auto_watch`, dan `watch_non_git` diaktifkan (project ini sudah menjadi git repo lokal). `opencode.json` level proyek meng-enable MCP hanya untuk watcher; `tools` seharusnya `false` (working tree saat ini `true`, lihat §3). `.cbmignore` mengecualikan `.agents/`, `.opencode/`, `.next/`, `node_modules/`, `.vercel/`, `Foto/`, CSV PII, dan `.env*`, sehingga reindex otomatis turun dari 6.074 node/12.541 edge menjadi 436 node/800 edge; reindex manual terakhir menghasilkan **436 node/821 edge**. Daemon berjalan `session-managed`, watcher `git` poll 5 detik; reindex manual 25 Oktober 2026 07:20 UTC selesai `ready`. Watcher hanya hidup selama sesi opencode/daemon berjalan; config dibaca saat startup.
+- **Reindex manual:** 436 nodes / 821 edges, status `ready`; 1 file parse parsial (`supabase/schema.sql`), 0 unusable/skipped; 7 direktori/12 file tidak diindeks; doc links 29 (2 ambigu, 12 below tier).
 - **Homepage & logo:** kartu bawah diganti **Filosofi CIPHER** (4 poin) dan **Profil Akademik**; logo header diganti emblem dari `cipher25.jpe` (crop + background transparan → `public/cipher-mark.webp`, tampil 55×44); footer menjadi "Dikelola oleh RyuuZev" dengan tautan ke GitHub.
 - **Polish kartu beranda:** teks abu-abu di Filosofi/Profil → `text-zinc-300`; padding `p-8 sm:p-10`; border `border-white/10`; deskripsi hero `leading-7 sm:leading-8`. Diverifikasi di 1440×900 dan 390×844.
 - **Rilis:** `v1.0.0` (commit `fdacd45`) menandai state produksi sebelum polish; `v1.1.0` menandai polish kartu + deploy `dpl_6HXeXHLqCKYL4kd1wGT1DtXBCSJ9`. `package.json`/`package-lock.json` diset ke 1.1.0.
@@ -148,7 +148,7 @@ Audit read-only di produksi (1440×900, 768×1024, 390×844, 320×700), publik +
    Skrip Playwright sementara sudah dihapus setelah lolos 10/10. Bila ingin regression suite permanen, tambahkan `playwright` sebagai devDependency dan pindahkan alur (login → tabel → dialog → CRUD uji → cleanup) ke `scripts/`.
 
 5. **Watcher Codebase Memory sudah aktif.**
-   Daemon `active (session-managed)`, watcher `git` poll 5 detik, index `433/806` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
+   Daemon `active (session-managed)`, watcher `git` poll 5 detik, index `436/821` `ready`. Tidak perlu restart selama sesi ini. Saat opencode ditutup, watcher ikut berhenti; sesi baru akan memulainya lagi lewat config project. Jika tidak aktif, jalankan ulang skrip indexing; jangan panggil tool MCP.
 
 6. **Housekeeping.**
    Profil Chrome headless dan screenshot audit (`%TEMP%\cipher-audit-*`) sudah dihapus. Folder temp probe sesi sebelumnya sudah dibersihkan. `.env.local` tetap jangan di-commit.
